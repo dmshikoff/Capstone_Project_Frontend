@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Row, Input } from "react-materialize";
+import { Row, Input, Button } from "react-materialize";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getAllRecipes } from "../actions/actions";
+import { getAllRecipes, createNewRecipe } from "../actions/actions";
 import { withAuthentication } from "../helpers";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -14,9 +14,9 @@ class Cookbook extends Component {
     super(props);
 
     this.state = {
-        name:'',
-        ingredients: [{qty:'', unit:'', name:''}],
-        instructions: ''
+      name: "",
+      ingredients: [{ qty: "", unit: "", name: "" }],
+      instructions: ""
     };
   }
 
@@ -24,22 +24,23 @@ class Cookbook extends Component {
     this.props.getAllRecipes(this.props.authState.id);
   };
   addNewIngredient = () => {
-    this.setState({ingredients: [...this.state.ingredients, {qty:'', unit:'', name:''}] })
-  }
-  handleNameChange = (id, value) => {
-      const ingredients = this.state.ingredients.map((ele, i) => {
-          if(i === id) {
-              return {...ele, name: value}
-          }
-          else {
-              return {...ele}
-          }
-      })
+    this.setState({
+      ingredients: [...this.state.ingredients, { qty: "", unit: "", name: "" }]
+    });
+  };
+  handleNameChange = (id, key, value) => {
+    const ingredients = this.state.ingredients.map((ele, i) => {
+      if (i === id) {
+        return { ...ele, [key]: value };
+      } else {
+        return { ...ele };
+      }
+    });
 
-      this.setState({ingredients})
-  }
+    this.setState({ ingredients });
+  };
   render() {
-      console.log(this.state)
+    console.log(this.state);
     return (
       <div>
         <Navbar />
@@ -63,30 +64,68 @@ class Cookbook extends Component {
           <Row className="center-align">
             <h4>Add a New Recipe</h4>
           </Row>
-          
+
           <Row className="cookbook-form-row">
-            <form className="cookbook-form">
-                <Input value={this.state.name} onChange={_=>_} type="text" label="Recipe Name" />
-                {
-                    this.state.ingredients.map((ele,id) => {
-                        return (
-                            <Row key={id}>
-                                <Input type="number" value={ele.qty} label="Qty" />
-                                <Input type="select" value={ele.unit} label="Unit">
-                                <option value="1">Option 1</option>
-                                <option value="2">Option 2</option>
-                                <option value="3">Option 3</option>
-                                </Input>
-                                <Input type="text" 
-                                    value={ele.name} 
-                                    onChange={(event) => this.handleNameChange(id, event.target.value)} 
-                                    label="Name" />
-                            </Row>
-                        )
-                    })
-                }
-                <div onClick={this.addNewIngredient}>+</div>
-                <Input value={this.state.instructions} onChange={_=>_} type="textarea" label="Instructions" />
+            <form className="cookbook-form"
+            onSubmit={event => {
+                event.preventDefault()
+                this.props.createNewRecipe(this.state.name, this.state.instructions, this.props.authState.id)
+            }}
+            >
+              <Input
+                value={this.state.name}
+                onChange={event => {
+                    this.setState({name: event.target.value})
+                }}
+                type="text"
+                label="Recipe Name"
+              />
+              {this.state.ingredients.map((ele, id) => {
+                return (
+                  <Row key={id}>
+                    <Input
+                      type="number"
+                      value={ele.qty}
+                      onChange={event =>
+                        this.handleNameChange(id, "qty", event.target.value)
+                      }
+                      label="Qty"
+                    />
+                    <Input
+                      type="select"
+                      value={ele.unit}
+                      label="Unit"
+                      onChange={event =>
+                        this.handleNameChange(id, "unit", event.target.value)
+                      }
+                    >
+                      <option value="1">Option 1</option>
+                      <option value="2">Option 2</option>
+                      <option value="3">Option 3</option>
+                    </Input>
+                    <Input
+                      type="text"
+                      value={ele.name}
+                      onChange={event =>
+                        this.handleNameChange(id, "name", event.target.value)
+                      }
+                      label="Name"
+                    />
+                  </Row>
+                );
+              })}
+              <div onClick={this.addNewIngredient}>+</div>
+              <Input
+                value={this.state.instructions}
+                onChange={event => {
+                    this.setState({instructions: event.target.value})
+                }}
+                type="textarea"
+                label="Instructions"
+              />
+              <Row className="recipe-button-row">
+              <Button>Create Recipe</Button>
+              </Row>
             </form>
           </Row>
         </Row>
@@ -99,7 +138,7 @@ class Cookbook extends Component {
 const mapStateToProps = ({ recipesByUser }) => ({ recipesByUser });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getAllRecipes }, dispatch);
+  bindActionCreators({ getAllRecipes, createNewRecipe }, dispatch);
 
 export default withAuthentication(
   connect(

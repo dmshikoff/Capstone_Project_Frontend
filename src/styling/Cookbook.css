@@ -36,3 +36,10 @@
     justify-content: center;
     flex-direction: column;
 }
+
+.recipe-button-row {
+  max-width: 50%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+}

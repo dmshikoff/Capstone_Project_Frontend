@@ -2,6 +2,7 @@ import axios from "axios";
 import { request } from "../helpers/"
 export const GET_INGREDIENTS_BY_USER = "GET_INGREDIENTS_BY_USER";
 export const GET_RECIPES_BY_USER = "GET_RECIPES_BY_USER";
+export const CREATE_NEW_RECIPE = "CREATE_NEW_RECIPE";
 
 export const getAllIngredients = userId => {
   return dispatch => {
@@ -25,5 +26,23 @@ export const getAllRecipes = userId => {
         payload: response.data.allRecipes
       })
     })
+  }
+}
+
+export const createNewRecipe = (name, instructions, user_id) => {
+  return dispatch => {
+    request(`/users/${user_id}/recipes`, "post", {name, instructions, user_id})
+    .then(response => {
+      dispatch({
+        type: CREATE_NEW_RECIPE,
+        payload: response.data
+      })
+    })
+  }
+}
+
+export const addIngredientsForRecipe = () => {
+  return dispatch => {
+    
   }
 }
