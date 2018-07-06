@@ -1,0 +1,41 @@
+.body-row {
+    height: 65vh;
+    background: url('../images/restaurant_icons.png') top repeat;
+}
+
+.login-row {
+    padding-bottom: 15px;
+}
+
+.login-button {
+    display: flex;
+    justify-content: center;
+}
+
+.new-user-row {
+    padding-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.new-user {
+    padding-right: 10px;
+}
+
+h4, p {
+    margin-top: 0px;
+    padding-top: 10px;
+}
+
+.form-input-row {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+}
+
+div.row.form-input-row:after {
+    content: none;
+    display: none;
+    clear: none;
+}

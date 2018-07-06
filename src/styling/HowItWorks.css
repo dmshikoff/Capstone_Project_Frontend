@@ -1,0 +1,75 @@
+.how-it-works-div {
+    background: url('../images/restaurant_icons.png') top repeat;
+}
+
+.how-title-con {
+    width: 100%;
+}
+
+.icon-row {
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.calendar-icon {
+    padding-top: 18px;
+}
+
+.recipe-icon {
+    padding-top: 10px;
+    width: 90px;
+    height: 90px;
+}
+
+.calendar-icon, .fridge-icon {
+    width: 75px;
+    height: 75px;
+}
+
+.fridge-icon {
+    padding-top: 18px;
+    padding-left: 4px;
+    width: 85px;
+    height: 85px;
+}
+
+
+.icon-row:after, .row:before {
+    content: none;
+    display: none;
+    clear: none;
+}
+
+.icon-background {
+    display: inline-block;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+
+.fridge-icon-background {
+    background: rgb(184, 186, 78, .5);
+}
+
+.recipe-icon-background {
+    background: rgb(152, 57, 40, .5);
+}
+
+.calendar-icon-background {
+    background: rgb(242, 153, 67, .5);
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.get-started-button-row {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 25px;
+}
+
+.row {
+    margin-bottom: 0px;
+}

@@ -1,0 +1,83 @@
+.pantry-row {
+  background: url("../images/restaurant_icons.png") top repeat;
+}
+
+.ingredient-row {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#triple {
+  width: 760px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  border-top: 1px solid #ccc;
+  text-align: center;
+}
+
+.horizontal-list-item {
+  line-height: 1.5em;
+  border-bottom: 1px solid #ccc;
+  float: left;
+  display: inline;
+}
+
+#triple .horizontal-list-item {
+  width: 33.333%;
+}
+
+.ingredient-title-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.info-img {
+    margin-left: 10px;
+    height: 15px;
+    width: 15px;
+}
+
+.info-img:hover{
+    cursor: pointer;
+}
+
+.ingredient-form-row {
+    width: 50%;
+}
+
+.ingredient-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.ingredient-button-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.add {
+    margin-right: 10px;
+}
+
+.remove {
+    background-color: #983929;
+}
+
+.remove:hover {
+    background-color: #AB402E;
+}
+
+.ingredient-button {
+    margin-bottom: 25px;
+}
+
+div.row.ingredient-form-row:after {
+    content: none;
+    display: none;
+    clear: none;
+}

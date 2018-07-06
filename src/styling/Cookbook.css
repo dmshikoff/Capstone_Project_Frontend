@@ -1,0 +1,38 @@
+.cookbook-row {
+  background: url("../images/restaurant_icons.png") top repeat;
+}
+
+.recipe-row {
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#triple {
+  width: 760px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  border-top: 1px solid #ccc;
+  text-align: center;
+}
+
+.horizontal-list-item {
+  line-height: 1.5em;
+  border-bottom: 1px solid #ccc;
+  float: left;
+  display: inline;
+}
+
+#triple .horizontal-list-item {
+  width: 33.333%;
+}
+
+.cookbook-form-row {
+  width: 50%;
+}
+
+.cookbook-form {
+  display: flex;
+    justify-content: center;
+    flex-direction: column;
+}

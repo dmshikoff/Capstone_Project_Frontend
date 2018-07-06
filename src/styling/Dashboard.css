@@ -1,0 +1,30 @@
+.dashboard-div {
+    background: url('../images/restaurant_icons.png') top repeat;
+}
+
+.path-row {
+    padding-top: 20px;
+    height: 55vh;
+}
+
+.fridge-col, .recipe-col, .calendar-col {
+    cursor: pointer;
+}
+
+.pantry-list {
+    display: list-item;
+}
+
+.list-item {
+    padding-top: 20px;
+    font-size: 20px;
+}
+
+ul {
+    margin-top: 0px;
+}
+
+h2 {
+    margin-top: 0px;
+    padding-top: 20px;
+}

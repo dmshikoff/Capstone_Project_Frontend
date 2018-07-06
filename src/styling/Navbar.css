@@ -1,0 +1,16 @@
+nav {
+    z-index: 99;
+    height: 100px;
+    line-height: 100px;
+    background-color: rgb(47, 62, 13, .7);
+}
+
+nav ul a {
+    font-size: 20px;
+}
+
+.logo-img {
+    margin-top: 12px;
+    height: 75px;
+    width: 375px;
+} 

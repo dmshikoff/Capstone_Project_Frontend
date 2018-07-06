@@ -1,0 +1,16 @@
+.new-user-form-div {
+    background: url('../images/restaurant_icons.png') top repeat;
+}
+
+.input-row {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+}
+
+.sign-up-button {
+    padding-bottom: 15px;
+    display: flex;
+    justify-content: center;
+}
