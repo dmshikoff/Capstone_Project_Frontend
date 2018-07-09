@@ -2,7 +2,9 @@ import { combineReducers } from "redux";
 import {
   GET_INGREDIENTS_BY_USER,
   GET_RECIPES_BY_USER,
-  CREATE_NEW_RECIPE
+  CREATE_NEW_RECIPE,
+  GET_ONE_RECIPE_BY_USER,
+  INGREDIENTS_BY_RECIPE
 } from "../actions/actions.js";
 
 const ingredientsByUser = (state = [], action) => {
@@ -23,6 +25,15 @@ const recipesByUser = (state = [], action) => {
   }
 };
 
+const oneRecipeByUser = (state = [], action) => {
+  switch (action.type) {
+    case GET_ONE_RECIPE_BY_USER:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 const createNewRecipe = (state = [], action) => {
   switch (action.type) {
     case CREATE_NEW_RECIPE:
@@ -32,9 +43,20 @@ const createNewRecipe = (state = [], action) => {
   }
 }
 
+const ingredientsByRecipe = (state = [], action) => {
+  switch (action.type) {
+    case INGREDIENTS_BY_RECIPE:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   ingredientsByUser,
   recipesByUser,
-  createNewRecipe
+  createNewRecipe,
+  oneRecipeByUser,
+  ingredientsByRecipe
 });
 

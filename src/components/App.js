@@ -8,6 +8,7 @@ import Dashboard from "./Dashboard";
 import Ingredients from "./Ingredients";
 import Cookbook from "./Cookbook";
 import Plans from "./Plans";
+import Recipe from "./Recipe"
 import "../styling/App.css";
 
 class App extends Component {
@@ -17,10 +18,11 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
-          <AuthenticatedRoute exact path="/Dashboard" component={Dashboard} />
-          <AuthenticatedRoute exact path="/Ingredients" component={Ingredients} />
-          <AuthenticatedRoute exact path="/Cookbook" component={Cookbook} />
-          <AuthenticatedRoute exact path="/Plans" component={Plans} />
+          <AuthenticatedRoute exact path="/dashboard" component={Dashboard} />
+          <AuthenticatedRoute exact path="/ingredients" component={Ingredients} />
+          <AuthenticatedRoute exact path="/cookbook" component={Cookbook} />
+          <AuthenticatedRoute exact path="/plans" component={Plans} />
+          <AuthenticatedRoute exact path="/recipe/:id" component={Recipe} />
         </Switch>
       </BrowserRouter>
     );

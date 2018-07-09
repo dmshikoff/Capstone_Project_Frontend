@@ -5,7 +5,8 @@ import { bindActionCreators } from "redux";
 import {
   getAllRecipes,
   getAllIngredients,
-  createNewRecipe
+  createNewRecipe,
+  getOneRecipe
 } from "../actions/actions";
 import { withAuthentication } from "../helpers";
 import Navbar from "./Navbar";
@@ -28,11 +29,13 @@ class Cookbook extends Component {
     this.props.getAllRecipes(this.props.authState.id);
     this.props.getAllIngredients(this.props.authState.id);
   };
+
   addNewIngredient = () => {
     this.setState({
       ingredients: [...this.state.ingredients, { qty: "", unit: "", name: "" }]
     });
   };
+
   handleNameChange = (index, key, value) => {
     const ingredients = this.state.ingredients.map((ele, i) => {
       if (i === index) {
@@ -72,7 +75,12 @@ class Cookbook extends Component {
             <ul id="triple">
               {this.props.recipesByUser.map(ele => {
                 return (
-                  <li className="horizontal-list-item" key={ele.id}>
+                  <li className="horizontal-list-item" key={ele.id} value={ele.id}
+                  onClick={event => {
+                    this.props.getOneRecipe(this.props.authState.id, event.target.value);
+                    this.props.history.push(`/Recipe/${ele.id}`)
+                  }}
+                  >
                     {ele.name}
                   </li>
                 );
@@ -93,8 +101,11 @@ class Cookbook extends Component {
                   this.state.name,
                   this.state.instructions,
                   this.props.authState.id,
-                  this.state.ingredients
-                );
+                  this.state.ingredients,
+                  function(){
+                    this.props.getAllRecipes(this.props.authState.id);
+                  }
+                )
               }}
             >
               <Input
@@ -176,14 +187,15 @@ class Cookbook extends Component {
   }
 }
 
-const mapStateToProps = ({ recipesByUser, ingredientsByUser }) => ({
+const mapStateToProps = ({ recipesByUser, ingredientsByUser, oneRecipeByUser }) => ({
   recipesByUser,
-  ingredientsByUser
+  ingredientsByUser,
+  oneRecipeByUser
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    { getAllRecipes, getAllIngredients, createNewRecipe },
+    { getAllRecipes, getAllIngredients, createNewRecipe, getOneRecipe },
     dispatch
   );
 

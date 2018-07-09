@@ -3,6 +3,8 @@ import { request } from "../helpers/"
 export const GET_INGREDIENTS_BY_USER = "GET_INGREDIENTS_BY_USER";
 export const GET_RECIPES_BY_USER = "GET_RECIPES_BY_USER";
 export const CREATE_NEW_RECIPE = "CREATE_NEW_RECIPE";
+export const GET_ONE_RECIPE_BY_USER = "GET_ONE_RECIPE_BY_USER";
+export const INGREDIENTS_BY_RECIPE = "INGREDIENTS_BY_RECIPE";
 
 export const getAllIngredients = userId => {
   return dispatch => {
@@ -29,13 +31,39 @@ export const getAllRecipes = userId => {
   }
 }
 
-export const createNewRecipe = (name, instructions, user_id, ingredientsArray) => {
+export const getOneRecipe = (userId, recipeId) => {
+  return dispatch => {
+    request(`/users/${userId}/recipes/${recipeId}`)
+    .then(response => {
+      dispatch({
+        type: GET_ONE_RECIPE_BY_USER,
+        payload: response.data.data
+      })
+    })
+  }
+}
+
+export const createNewRecipe = (name, instructions, user_id, ingredientsArray, cb) => {
   return dispatch => {
     request(`/users/${user_id}/recipes`, "post", {name, instructions, user_id, ingredientsArray})
     .then(response => {
       dispatch({
         type: CREATE_NEW_RECIPE,
         payload: response.data
+      })
+      if(cb) cb()
+    })
+  }
+}
+
+export const getIngredientsByRecipe = (user_id, recipe_id) => {
+  return dispatch => {
+    request(`/users/${user_id}/recipes/${recipe_id}/ingredients`)
+    .then(response => {
+      console.log(response)
+      dispatch({
+        type: INGREDIENTS_BY_RECIPE,
+        payload: response.data.allIngredients
       })
     })
   }
