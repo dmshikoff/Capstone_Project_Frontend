@@ -7,6 +7,7 @@ import Login from "./Login";
 import Dashboard from "./Dashboard";
 import Ingredients from "./Ingredients";
 import Cookbook from "./Cookbook";
+import Plans from "./Plans";
 import "../styling/App.css";
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
           <AuthenticatedRoute exact path="/Dashboard" component={Dashboard} />
           <AuthenticatedRoute exact path="/Ingredients" component={Ingredients} />
           <AuthenticatedRoute exact path="/Cookbook" component={Cookbook} />
+          <AuthenticatedRoute exact path="/Plans" component={Plans} />
         </Switch>
       </BrowserRouter>
     );

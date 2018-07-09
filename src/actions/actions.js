@@ -29,20 +29,14 @@ export const getAllRecipes = userId => {
   }
 }
 
-export const createNewRecipe = (name, instructions, user_id) => {
+export const createNewRecipe = (name, instructions, user_id, ingredientsArray) => {
   return dispatch => {
-    request(`/users/${user_id}/recipes`, "post", {name, instructions, user_id})
+    request(`/users/${user_id}/recipes`, "post", {name, instructions, user_id, ingredientsArray})
     .then(response => {
       dispatch({
         type: CREATE_NEW_RECIPE,
         payload: response.data
       })
     })
-  }
-}
-
-export const addIngredientsForRecipe = () => {
-  return dispatch => {
-    
   }
 }
