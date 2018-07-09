@@ -6,7 +6,7 @@ export const CREATE_NEW_RECIPE = "CREATE_NEW_RECIPE";
 export const GET_ONE_RECIPE_BY_USER = "GET_ONE_RECIPE_BY_USER";
 export const INGREDIENTS_BY_RECIPE = "INGREDIENTS_BY_RECIPE";
 
-export const getAllIngredients = userId => {
+export const getAllIngredientsUserPosseses = userId => {
   return dispatch => {
     axios
       .get(`http://localhost:5000/users/${userId}/ingredients`)

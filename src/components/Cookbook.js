@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
   getAllRecipes,
-  getAllIngredients,
+  getAllIngredientsUserPosseses,
   createNewRecipe,
   getOneRecipe
 } from "../actions/actions";
@@ -27,7 +27,7 @@ class Cookbook extends Component {
 
   componentDidMount = () => {
     this.props.getAllRecipes(this.props.authState.id);
-    this.props.getAllIngredients(this.props.authState.id);
+    this.props.getAllIngredientsUserPosseses(this.props.authState.id);
   };
 
   addNewIngredient = () => {
@@ -195,7 +195,7 @@ const mapStateToProps = ({ recipesByUser, ingredientsByUser, oneRecipeByUser }) 
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    { getAllRecipes, getAllIngredients, createNewRecipe, getOneRecipe },
+    { getAllRecipes, getAllIngredientsUserPosseses, createNewRecipe, getOneRecipe },
     dispatch
   );
 

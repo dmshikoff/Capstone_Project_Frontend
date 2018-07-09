@@ -3,7 +3,7 @@ import { Row, Button, Modal } from "react-materialize";
 import { withAuthentication } from "../helpers";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getAllIngredients } from "../actions/actions.js";
+import { getAllIngredientsUserPosseses } from "../actions/actions.js";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import AddIngredientForm from "./AddIngredientForm";
@@ -22,7 +22,7 @@ class Ingredients extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getAllIngredients(this.props.authState.id);
+    this.props.getAllIngredientsUserPosseses(this.props.authState.id);
   };
 
   render() {
@@ -97,7 +97,7 @@ class Ingredients extends Component {
 const mapStateToProps = ({ ingredientsByUser }) => ({ ingredientsByUser });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getAllIngredients }, dispatch);
+  bindActionCreators({ getAllIngredientsUserPosseses }, dispatch);
 
 export default withAuthentication(
   connect(
