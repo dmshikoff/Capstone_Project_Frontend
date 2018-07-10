@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { Row, Input, Col, Autocomplete, Button } from "react-materialize";
-import { getAllPlansByUser, getAllRecipes } from "../actions/actions";
+import {
+  getAllPlansByUser,
+  getAllRecipes,
+  createNewPlan
+} from "../actions/actions";
 import { withAuthentication } from "../helpers";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -38,7 +42,6 @@ class Plans extends Component {
   };
 
   handleRecipeComplete = (index, recipe, day) => {
-    console.log("hello?")
     const recipes = this.state.week[day].map((ele, i) => {
       if (i === index) {
         return { ...ele, id: recipe.id, recipe: recipe.name };
@@ -46,11 +49,12 @@ class Plans extends Component {
         return { ...ele };
       }
     });
-    console.log("recipe", recipes)
-    this.setState({week: {
-      ...this.state.week,
-      [day]: recipes 
-    }});
+    this.setState({
+      week: {
+        ...this.state.week,
+        [day]: recipes
+      }
+    });
   };
 
   componentDidMount = () => {
@@ -70,7 +74,18 @@ class Plans extends Component {
           <Row className="recipe-row">
             <ul id="triple">
               {this.props.plansByUser.map(ele => {
-                return <li key={ele.id}>{ele.name}</li>;
+                return (
+                  <li
+                    className="horizontal-list-item"
+                    key={ele.id}
+                    value={ele.name}
+                    onClick={event => {
+                      this.props.history.push(`/plans/${ele.id}`);
+                    }}
+                  >
+                    {ele.name}
+                  </li>
+                );
               })}
             </ul>
           </Row>
@@ -80,13 +95,25 @@ class Plans extends Component {
           </Row>
           <Row>
             <form
-            onSubmit={event => {
-              event.preventDefault()
-              
-            }}
+              onSubmit={event => {
+                event.preventDefault();
+                this.props.createNewPlan(
+                  this.props.authState.id,
+                  this.state.planName,
+                  this.state.week,
+                  () => {
+                    this.props.getAllPlansByUser(this.props.authState.id);
+                  }
+                );
+              }}
             >
               <Row className="new-plan-row">
-                <Input label="Plan Name" />
+                <Input
+                  label="Plan Name"
+                  onChange={event => {
+                    this.setState({ planName: event.target.value });
+                  }}
+                />
               </Row>
               <Row className="plan-schedule-row">
                 <Col className="plan-day-cell sunday-cell">
@@ -103,19 +130,25 @@ class Plans extends Component {
                             return acc;
                           }, {})}
                           onChange={event => {
-                            const recipe = this.props.recipesByUser.find(ele => ele.name === event.target.value);
+                            const recipe = this.props.recipesByUser.find(
+                              ele => ele.name === event.target.value
+                            );
                             if (recipe) {
-                              this.handleRecipeComplete(index, recipe, "Sunday")
+                              this.handleRecipeComplete(
+                                index,
+                                recipe,
+                                "Sunday"
+                              );
+                            } else {
                             }
-                            else {
-                              
-                            } 
                           }}
                           onAutocomplete={recipeName => {
-                            console.log('name', recipeName)
-                            const recipe = this.props.recipesByUser.find(ele => ele.name === recipeName)
-                            this.handleRecipeComplete(index, recipe, "Sunday")
-                        }}
+                            console.log("name", recipeName);
+                            const recipe = this.props.recipesByUser.find(
+                              ele => ele.name === recipeName
+                            );
+                            this.handleRecipeComplete(index, recipe, "Sunday");
+                          }}
                         />
                       );
                     })}
@@ -145,16 +178,24 @@ class Plans extends Component {
                             return acc;
                           }, {})}
                           onChange={event => {
-                            const recipe = this.props.recipesByUser.find(ele => ele.name === event.target.value);
+                            const recipe = this.props.recipesByUser.find(
+                              ele => ele.name === event.target.value
+                            );
                             if (recipe) {
-                              this.handleRecipeComplete(index, recipe, "Monday")
-                            } 
+                              this.handleRecipeComplete(
+                                index,
+                                recipe,
+                                "Monday"
+                              );
+                            }
                           }}
                           onAutocomplete={recipeName => {
-                            console.log('name', recipeName)
-                            const recipe = this.props.recipesByUser.find(ele => ele.name === recipeName)
-                            this.handleRecipeComplete(index, recipe, "Monday")
-                        }}
+                            console.log("name", recipeName);
+                            const recipe = this.props.recipesByUser.find(
+                              ele => ele.name === recipeName
+                            );
+                            this.handleRecipeComplete(index, recipe, "Monday");
+                          }}
                         />
                       );
                     })}
@@ -183,16 +224,24 @@ class Plans extends Component {
                             return acc;
                           }, {})}
                           onChange={event => {
-                            const recipe = this.props.recipesByUser.find(ele => ele.name === event.target.value);
+                            const recipe = this.props.recipesByUser.find(
+                              ele => ele.name === event.target.value
+                            );
                             if (recipe) {
-                              this.handleRecipeComplete(index, recipe, "Tuesday")
-                            } 
+                              this.handleRecipeComplete(
+                                index,
+                                recipe,
+                                "Tuesday"
+                              );
+                            }
                           }}
                           onAutocomplete={recipeName => {
-                            console.log('name', recipeName)
-                            const recipe = this.props.recipesByUser.find(ele => ele.name === recipeName)
-                            this.handleRecipeComplete(index, recipe, "Tuesday")
-                        }}
+                            console.log("name", recipeName);
+                            const recipe = this.props.recipesByUser.find(
+                              ele => ele.name === recipeName
+                            );
+                            this.handleRecipeComplete(index, recipe, "Tuesday");
+                          }}
                         />
                       );
                     })}
@@ -221,16 +270,28 @@ class Plans extends Component {
                             return acc;
                           }, {})}
                           onChange={event => {
-                            const recipe = this.props.recipesByUser.find(ele => ele.name === event.target.value);
+                            const recipe = this.props.recipesByUser.find(
+                              ele => ele.name === event.target.value
+                            );
                             if (recipe) {
-                              this.handleRecipeComplete(index, recipe, "Wednesday")
-                            } 
+                              this.handleRecipeComplete(
+                                index,
+                                recipe,
+                                "Wednesday"
+                              );
+                            }
                           }}
                           onAutocomplete={recipeName => {
-                            console.log('name', recipeName)
-                            const recipe = this.props.recipesByUser.find(ele => ele.name === recipeName)
-                            this.handleRecipeComplete(index, recipe, "Wednesday")
-                        }}
+                            console.log("name", recipeName);
+                            const recipe = this.props.recipesByUser.find(
+                              ele => ele.name === recipeName
+                            );
+                            this.handleRecipeComplete(
+                              index,
+                              recipe,
+                              "Wednesday"
+                            );
+                          }}
                         />
                       );
                     })}
@@ -259,16 +320,28 @@ class Plans extends Component {
                             return acc;
                           }, {})}
                           onChange={event => {
-                            const recipe = this.props.recipesByUser.find(ele => ele.name === event.target.value);
+                            const recipe = this.props.recipesByUser.find(
+                              ele => ele.name === event.target.value
+                            );
                             if (recipe) {
-                              this.handleRecipeComplete(index, recipe, "Thursday")
-                            } 
+                              this.handleRecipeComplete(
+                                index,
+                                recipe,
+                                "Thursday"
+                              );
+                            }
                           }}
                           onAutocomplete={recipeName => {
-                            console.log('name', recipeName)
-                            const recipe = this.props.recipesByUser.find(ele => ele.name === recipeName)
-                            this.handleRecipeComplete(index, recipe, "Thursday")
-                        }}
+                            console.log("name", recipeName);
+                            const recipe = this.props.recipesByUser.find(
+                              ele => ele.name === recipeName
+                            );
+                            this.handleRecipeComplete(
+                              index,
+                              recipe,
+                              "Thursday"
+                            );
+                          }}
                         />
                       );
                     })}
@@ -297,16 +370,24 @@ class Plans extends Component {
                             return acc;
                           }, {})}
                           onChange={event => {
-                            const recipe = this.props.recipesByUser.find(ele => ele.name === event.target.value);
+                            const recipe = this.props.recipesByUser.find(
+                              ele => ele.name === event.target.value
+                            );
                             if (recipe) {
-                              this.handleRecipeComplete(index, recipe, "Friday")
-                            } 
+                              this.handleRecipeComplete(
+                                index,
+                                recipe,
+                                "Friday"
+                              );
+                            }
                           }}
                           onAutocomplete={recipeName => {
-                            console.log('name', recipeName)
-                            const recipe = this.props.recipesByUser.find(ele => ele.name === recipeName)
-                            this.handleRecipeComplete(index, recipe, "Friday")
-                        }}
+                            console.log("name", recipeName);
+                            const recipe = this.props.recipesByUser.find(
+                              ele => ele.name === recipeName
+                            );
+                            this.handleRecipeComplete(index, recipe, "Friday");
+                          }}
                         />
                       );
                     })}
@@ -335,16 +416,28 @@ class Plans extends Component {
                             return acc;
                           }, {})}
                           onChange={event => {
-                            const recipe = this.props.recipesByUser.find(ele => ele.name === event.target.value);
+                            const recipe = this.props.recipesByUser.find(
+                              ele => ele.name === event.target.value
+                            );
                             if (recipe) {
-                              this.handleRecipeComplete(index, recipe, "Saturday")
-                            } 
+                              this.handleRecipeComplete(
+                                index,
+                                recipe,
+                                "Saturday"
+                              );
+                            }
                           }}
                           onAutocomplete={recipeName => {
-                            console.log('name', recipeName)
-                            const recipe = this.props.recipesByUser.find(ele => ele.name === recipeName)
-                            this.handleRecipeComplete(index, recipe, "Saturday")
-                        }}
+                            console.log("name", recipeName);
+                            const recipe = this.props.recipesByUser.find(
+                              ele => ele.name === recipeName
+                            );
+                            this.handleRecipeComplete(
+                              index,
+                              recipe,
+                              "Saturday"
+                            );
+                          }}
                         />
                       );
                     })}
@@ -372,13 +465,17 @@ class Plans extends Component {
   }
 }
 
-const mapStateToProps = ({ plansByUser, recipesByUser }) => ({
+const mapStateToProps = ({ plansByUser, recipesByUser, newPlan }) => ({
   plansByUser,
-  recipesByUser
+  recipesByUser,
+  newPlan
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ getAllPlansByUser, getAllRecipes }, dispatch);
+  bindActionCreators(
+    { getAllPlansByUser, getAllRecipes, createNewPlan },
+    dispatch
+  );
 
 export default withAuthentication(
   connect(

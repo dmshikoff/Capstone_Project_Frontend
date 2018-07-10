@@ -6,7 +6,8 @@ import {
   GET_ONE_RECIPE_BY_USER,
   INGREDIENTS_BY_RECIPE,
   PLANS_BY_USER,
-  CREATE_NEW_OWNED_INGREDIENT
+  CREATE_NEW_OWNED_INGREDIENT,
+  CREATE_NEW_PLAN
 } from "../actions/actions.js";
 
 const ingredientsByUser = (state = [], action) => {
@@ -72,6 +73,15 @@ const createUserOwnedIngredient = (state = [], action) => {
   }
 }
 
+const newPlan = (state= [], action) => {
+  switch (action.type) {
+    case CREATE_NEW_PLAN:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   ingredientsByUser,
   recipesByUser,
@@ -79,6 +89,7 @@ export default combineReducers({
   oneRecipeByUser,
   ingredientsByRecipe,
   plansByUser,
-  createUserOwnedIngredient
+  createUserOwnedIngredient,
+  newPlan
 });
 

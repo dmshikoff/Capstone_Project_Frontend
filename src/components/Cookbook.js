@@ -100,7 +100,7 @@ class Cookbook extends Component {
                   this.state.instructions,
                   this.props.authState.id,
                   this.state.ingredients,
-                  function(){
+                   () => {
                     this.props.getAllRecipes(this.props.authState.id);
                   }
                 )
@@ -164,7 +164,9 @@ class Cookbook extends Component {
                   </Row>
                 );
               })}
-              <div onClick={this.addNewIngredient}>+</div>
+              <Row className="center-align">
+              <div onClick={this.addNewIngredient}><i className="fas fa-plus-circle" /></div>
+              </Row>
               <Input
                 value={this.state.instructions}
                 onChange={event => {

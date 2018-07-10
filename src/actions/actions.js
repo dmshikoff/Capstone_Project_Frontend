@@ -7,6 +7,7 @@ export const GET_ONE_RECIPE_BY_USER = "GET_ONE_RECIPE_BY_USER";
 export const INGREDIENTS_BY_RECIPE = "INGREDIENTS_BY_RECIPE";
 export const PLANS_BY_USER = "PLANS_BY_USER";
 export const CREATE_NEW_OWNED_INGREDIENT = "CREATE_NEW_OWNED_INGREDIENT";
+export const CREATE_NEW_PLAN = "CREATE_NEW_PLAN";
 
 export const getAllIngredientsUserPosseses = userId => {
   return dispatch => {
@@ -90,6 +91,19 @@ export const createNewOwnedIngredient = (user_id, {name, quantity, units}) => {
         type: CREATE_NEW_OWNED_INGREDIENT,
         payload: response.data.data
       })
+    })
+  }
+}
+
+export const createNewPlan = (user_id, name, week, cb) => {
+  return dispatch => {
+    request(`/users/${user_id}/plans`, "post", {user_id, name, week})
+    .then(response => {
+      dispatch({
+        type: CREATE_NEW_PLAN,
+        payload: response.data.data
+      })
+      if(cb) cb()
     })
   }
 }
