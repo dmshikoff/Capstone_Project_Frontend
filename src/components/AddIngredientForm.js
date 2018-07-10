@@ -1,26 +1,94 @@
-import React from "react";
-import { Row, Input } from "react-materialize";
+import React, { Component } from "react";
+import { Row, Input, Button, Autocomplete } from "react-materialize";
+import { withAuthentication } from "../helpers";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import {
+  createNewOwnedIngredient,
+  getAllIngredientsUserPosseses
+} from "../actions/actions.js";
 
+class AddIngredientForm extends Component {
+  constructor(props) {
+    super(props);
 
-const AddIngredientForm = () => {
+    this.state = {
+      name: "",
+      quantity: "",
+      unit: ""
+    };
+  }
+
+  componentDidMount = () => {
+    this.props.getAllIngredientsUserPosseses(this.props.authState.id);
+  };
+
+  render() {
     return (
-        <div>
+      <div>
         <Row className="center-align ingredient-title-row">
-            <h4>Add Ingredients</h4>
-          </Row>
-          <Row className="ingredient-form-row">
-            <form className="ingredient-form">
-              <Input label="Ingredient Name" />
-              <Input label="Quantity" />
-              <Input label="Unit" type="select">
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
-              </Input>
-            </form>
-          </Row>
-        </div>
-    )
+          <h4>Add Ingredients</h4>
+        </Row>
+        <Row className="ingredient-form-row">
+          <form
+            className="ingredient-form"
+            onSubmit={event => {
+              event.preventDefault();
+            }}
+          >
+            <Autocomplete
+              title="Ingredient Name"
+              data={this.props.ingredientsByUser.reduce((acc, ele) => {
+                acc[ele.name] = null;
+                return acc;
+              }, {})}
+              
+            />
+            <Input
+              label="Quantity"
+              value={this.state.quantity}
+              onChange={event => {
+                this.setState({ quantity: event.target.value });
+              }}
+            />
+            <Input
+              label="Unit"
+              type="select"
+              defaultValue="1"
+              onChange={event => {
+                this.setState({ unit: event.target.value });
+              }}
+            >
+              <option value="ounce(s)">ounce(s)</option>
+              <option value="fluid ounce(s)">fluid ounce(s)</option>
+              <option value="cup(s)">cup(s)</option>
+              <option value="pint(s)">pint(s)</option>
+              <option value="quart(s)">quart(s)</option>
+              <option value="gallon(s)">gallon(s)</option>
+              <option value="count">count</option>
+            </Input>
+            <Button className="add-ingredient-button-form-submit">Add</Button>
+          </form>
+        </Row>
+      </div>
+    );
+  }
 }
 
-export default AddIngredientForm;
+const mapStateToProps = ({ createUserOwnedIngredient, ingredientsByUser }) => ({
+  createUserOwnedIngredient,
+  ingredientsByUser
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    { createNewOwnedIngredient, getAllIngredientsUserPosseses },
+    dispatch
+  );
+
+export default withAuthentication(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(AddIngredientForm)
+);

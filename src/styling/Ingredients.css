@@ -81,3 +81,18 @@ div.row.ingredient-form-row:after {
     display: none;
     clear: none;
 }
+
+.add-ingredient-button-form-submit {
+    margin-bottom: 20px;
+}
+
+.remove-ingredient-button-form-submit {
+    background-color: #983929;
+    margin-bottom: 20px;
+}
+
+.remove-ingredient-button-form-submit:hover {
+    background-color: #983929;
+    margin-bottom: 20px;
+    background-color: #AB402E;
+}

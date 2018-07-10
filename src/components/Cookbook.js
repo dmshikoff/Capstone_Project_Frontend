@@ -63,12 +63,13 @@ class Cookbook extends Component {
     }
 
   render() {
+    console.log(this.props.ingredientsByUser)
     return (
       <div>
         <Navbar />
         <Row className="cookbook-row">
           <Row className="center-align">
-            <h2>Your Cookbook</h2>
+            <h2>My Cookbook</h2>
           </Row>
           <div className="divider" />
           <Row className="recipe-row">

@@ -31,14 +31,14 @@ class Ingredients extends Component {
         <Navbar />
         <Row className="pantry-row">
           <Row className="center-align">
-            <h2>Your Pantry</h2>
+            <h2>My Pantry</h2>
             <div className="divider" />
           </Row>
           <Row className="ingredient-row">
             <ul id="triple">
               {this.props.ingredientsByUser.map(ele => {
                 return (
-                  <li className="horizontal-list-item" key={ele.id}>
+                  <li className="horizontal-list-item" key={ele.name}>
                     {ele.quantity} {ele.units}{" "}
                     <span className="bold-text">{ele.name}</span>
                   </li>

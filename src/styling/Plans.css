@@ -1,0 +1,22 @@
+.plans-row {
+    background: url("../images/restaurant_icons.png") top repeat;
+}
+
+.new-plan-row {
+    display: flex;
+    justify-content: center;
+    max-width:750%;
+}
+
+.plan-schedule-row {
+    display: flex;
+    justify-content: center;
+}
+
+.plan-day-cell {
+    display: flex;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+}

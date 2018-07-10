@@ -4,7 +4,9 @@ import {
   GET_RECIPES_BY_USER,
   CREATE_NEW_RECIPE,
   GET_ONE_RECIPE_BY_USER,
-  INGREDIENTS_BY_RECIPE
+  INGREDIENTS_BY_RECIPE,
+  PLANS_BY_USER,
+  CREATE_NEW_OWNED_INGREDIENT
 } from "../actions/actions.js";
 
 const ingredientsByUser = (state = [], action) => {
@@ -52,11 +54,31 @@ const ingredientsByRecipe = (state = [], action) => {
   }
 }
 
+const plansByUser = (state = [], action) => {
+  switch (action.type) {
+    case PLANS_BY_USER:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+const createUserOwnedIngredient = (state = [], action) => {
+  switch (action.type) {
+    case CREATE_NEW_OWNED_INGREDIENT:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   ingredientsByUser,
   recipesByUser,
   createNewRecipe,
   oneRecipeByUser,
-  ingredientsByRecipe
+  ingredientsByRecipe,
+  plansByUser,
+  createUserOwnedIngredient
 });
 
