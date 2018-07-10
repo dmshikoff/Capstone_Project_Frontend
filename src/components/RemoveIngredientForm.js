@@ -26,7 +26,7 @@ class RemoveIngredientForm extends Component {
     return (
       <div>
         <Row className="center-align ingredient-title-row">
-          <h4>Add Ingredients</h4>
+          <h4>Remove Ingredients</h4>
         </Row>
         <Row className="ingredient-form-row">
           <form
@@ -66,7 +66,7 @@ class RemoveIngredientForm extends Component {
               <option value="gallon(s)">gallon(s)</option>
               <option value="count">count</option>
             </Input>
-            <Button className="remove-ingredient-button-form-submit">Remove</Button>
+            <Button waves="light" className="remove-ingredient-button-form-submit">Remove</Button>
           </form>
         </Row>
       </div>

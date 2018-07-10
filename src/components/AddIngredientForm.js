@@ -42,7 +42,7 @@ class AddIngredientForm extends Component {
                 acc[ele.name] = null;
                 return acc;
               }, {})}
-              
+
             />
             <Input
               label="Quantity"
@@ -67,7 +67,7 @@ class AddIngredientForm extends Component {
               <option value="gallon(s)">gallon(s)</option>
               <option value="count">count</option>
             </Input>
-            <Button className="add-ingredient-button-form-submit">Add</Button>
+            <Button waves="light" className="add-ingredient-button-form-submit">Add</Button>
           </form>
         </Row>
       </div>
