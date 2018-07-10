@@ -9,14 +9,36 @@
 }
 
 .plan-schedule-row {
-    display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .plan-day-cell {
+    max-width: 190px;
+    min-height: 200px;
+    border: 4px solid black;
+    margin-left: 10px;
+    border-radius: 25px;
+    margin-top: 10px;
+}
+
+.sunday-cell {
+    margin-left: 0px;
+}
+
+.save-plan-button {
     display: flex;
     justify-content: center;
-    width: 200px;
-    height: 200px;
-    border: 1px solid black;
+    margin: 10px 10px;
+}
+
+.plan-recipe-input {
+    max-width:  170px;
+}
+
+.plan-schedule-row {
+    margin: 0px 25px;
+}
+
+.fa-plus-circle {
+    cursor: pointer;
 }

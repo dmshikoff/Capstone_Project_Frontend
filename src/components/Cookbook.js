@@ -49,9 +49,7 @@ class Cookbook extends Component {
   };
 
     handleNameAutoComplete = (index, ingredient) => {
-        // console.log(id, ingredient, ingredient.name)
         const ingredients = this.state.ingredients.map((ele, i) => {
-            // console.log('element', ele, id, i)
             if (i === index) {
               return { ...ele, name: ingredient.name, id: ingredient.id };
             } else {
@@ -63,7 +61,6 @@ class Cookbook extends Component {
     }
 
   render() {
-    console.log(this.props.ingredientsByUser)
     return (
       <div>
         <Navbar />
