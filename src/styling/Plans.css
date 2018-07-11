@@ -12,6 +12,15 @@
     flex-wrap: wrap;
 }
 
+.completed-plan-day-cell {
+    min-width: 190px;
+    min-height: 200px;
+    border: 4px solid black;
+    margin-left: 10px;
+    border-radius: 25px;
+    margin-top: 10px;
+}
+
 .plan-day-cell {
     max-width: 190px;
     min-height: 200px;

@@ -76,7 +76,7 @@ class Cookbook extends Component {
                   <li className="horizontal-list-item" key={ele.id} value={ele.id}
                   onClick={event => {
                     this.props.getOneRecipe(this.props.authState.id, event.target.value);
-                    this.props.history.push(`/Recipe/${ele.id}`)
+                    this.props.history.push(`/recipes/${ele.id}`)
                   }}
                   >
                     {ele.name}

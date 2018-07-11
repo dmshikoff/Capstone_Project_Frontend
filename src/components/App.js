@@ -9,6 +9,7 @@ import Ingredients from "./Ingredients";
 import Cookbook from "./Cookbook";
 import Plans from "./Plans";
 import Recipe from "./Recipe"
+import SinglePlan from "./SinglePlan"
 import "../styling/App.css";
 
 class App extends Component {
@@ -22,7 +23,8 @@ class App extends Component {
           <AuthenticatedRoute exact path="/ingredients" component={Ingredients} />
           <AuthenticatedRoute exact path="/cookbook" component={Cookbook} />
           <AuthenticatedRoute exact path="/plans" component={Plans} />
-          <AuthenticatedRoute exact path="/recipe/:id" component={Recipe} />
+          <AuthenticatedRoute exact path="/recipes/:id" component={Recipe} />
+          <AuthenticatedRoute exact path="/plans/:id" component={SinglePlan} />
         </Switch>
       </BrowserRouter>
     );

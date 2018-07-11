@@ -4,8 +4,9 @@ import "../styling/HowItWorks.css";
 import fridge from "../images/fridge.svg";
 import recipe from "../images/recipes.svg";
 import calendar from "../images/calendar.svg";
+import { withRouter } from "react-router-dom"
 
-const HowItWorks = () => {
+const HowItWorks = (props) => {
   return (
     <div className="how-it-works-div">
       <Row>
@@ -45,7 +46,11 @@ const HowItWorks = () => {
         </Col>
       </Row>
       <Row className="get-started-button-row">
-      <Button>
+      <Button
+      onClick={() => {
+        props.history.push('./login')
+      }}
+      >
       Get Started Now
       </Button>
       </Row>
@@ -53,4 +58,4 @@ const HowItWorks = () => {
   );
 };
 
-export default HowItWorks;
+export default withRouter(HowItWorks);
