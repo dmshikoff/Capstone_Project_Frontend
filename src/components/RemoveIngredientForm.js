@@ -53,17 +53,21 @@ class RemoveIngredientForm extends Component {
             <Input
               label="Unit"
               type="select"
-              defaultValue="1"
+              defaultValue="empty"
               onChange={event => {
                 this.setState({ unit: event.target.value });
               }}
             >
-              <option value="ounce(s)">ounce(s)</option>
-              <option value="fluid ounce(s)">fluid ounce(s)</option>
-              <option value="cup(s)">cup(s)</option>
-              <option value="pint(s)">pint(s)</option>
-              <option value="quart(s)">quart(s)</option>
-              <option value="gallon(s)">gallon(s)</option>
+              <option value="empty" label="disabled" disabled></option>
+              <option value="milliliter(s)/ml">milliliter(s)/ml</option>
+              <option value="liter(s)/l">liter(s)/l</option>
+              <option value="fluid ounce(s)/fl-oz">fluid ounce(s)/fl-oz</option>
+              <option value="teaspoon(s)/tsp">teaspoon(s)/tsp</option>
+              <option value="Tablespoon(s)/Tbsp">Tablespoon(s)/Tbsp</option>
+              <option value="cup(s)/cp">cup(s)/cp</option>
+              <option value="pint(s)/pt">pint(s)/pt</option>
+              <option value="quart(s)/qt">quart(s)/q</option>
+              <option value="gallon(s)/gal">gallon(s)/gal</option>
               <option value="count">count</option>
             </Input>
             <Button waves="light" className="remove-ingredient-button-form-submit">Remove</Button>

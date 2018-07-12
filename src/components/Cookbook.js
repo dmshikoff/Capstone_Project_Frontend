@@ -48,17 +48,17 @@ class Cookbook extends Component {
     this.setState({ ingredients });
   };
 
-    handleNameAutoComplete = (index, ingredient) => {
-        const ingredients = this.state.ingredients.map((ele, i) => {
-            if (i === index) {
-              return { ...ele, name: ingredient.name, id: ingredient.id };
-            } else {
-              return { ...ele };
-            }
-          });
-      
-          this.setState({ ingredients });
-    }
+  handleNameAutoComplete = (index, ingredient) => {
+    const ingredients = this.state.ingredients.map((ele, i) => {
+      if (i === index) {
+        return { ...ele, name: ingredient.name, id: ingredient.id };
+      } else {
+        return { ...ele };
+      }
+    });
+
+    this.setState({ ingredients });
+  };
 
   render() {
     return (
@@ -73,11 +73,17 @@ class Cookbook extends Component {
             <ul id="triple">
               {this.props.recipesByUser.map(ele => {
                 return (
-                  <li className="horizontal-list-item" key={ele.id} value={ele.id}
-                  onClick={event => {
-                    this.props.getOneRecipe(this.props.authState.id, event.target.value);
-                    this.props.history.push(`/recipes/${ele.id}`)
-                  }}
+                  <li
+                    className="horizontal-list-item"
+                    key={ele.id}
+                    value={ele.id}
+                    onClick={event => {
+                      this.props.getOneRecipe(
+                        this.props.authState.id,
+                        event.target.value
+                      );
+                      this.props.history.push(`/recipes/${ele.id}`);
+                    }}
                   >
                     {ele.name}
                   </li>
@@ -100,10 +106,10 @@ class Cookbook extends Component {
                   this.state.instructions,
                   this.props.authState.id,
                   this.state.ingredients,
-                   () => {
+                  () => {
                     this.props.getAllRecipes(this.props.authState.id);
                   }
-                )
+                );
               }}
             >
               <Input
@@ -129,43 +135,57 @@ class Cookbook extends Component {
                       type="select"
                       value={ele.unit}
                       label="Unit"
+                      defaultValue="empty"
                       onChange={event =>
                         this.handleNameChange(index, "unit", event.target.value)
                       }
                     >
-                      <option value="ounce(s)">ounce(s)</option>
-                      <option value="fluid ounce(s)">fluid ounce(s)</option>
-                      <option value="cup(s)">cup(s)</option>
-                      <option value="pint(s)">pint(s)</option>
-                      <option value="quart(s)">quart(s)</option>
-                      <option value="gallon(s)">gallon(s)</option>
+                      <option value="empty" label="disabled" disabled></option>
+                      <option value="milliliter(s)/ml">milliliter(s)/ml</option>
+                      <option value="liter(s)/l">liter(s)/l</option>
+                      <option value="fluid ounce(s)/fl-oz">fluid ounce(s)/fl-oz</option>
+                      <option value="teaspoon(s)/tsp">teaspoon(s)/tsp</option>
+                      <option value="Tablespoon(s)/Tbsp">Tablespoon(s)/Tbsp</option>
+                      <option value="cup(s)/cp">cup(s)/cp</option>
+                      <option value="pint(s)/pt">pint(s)/pt</option>
+                      <option value="quart(s)/qt">quart(s)/q</option>
+                      <option value="gallon(s)/gal">gallon(s)/gal</option>
+                      <option value="count">count</option>
                     </Input>
                     <Autocomplete
-                        title="Ingredient"
-                        data={this.props.ingredientsByUser.reduce((acc, ele) => {
-                            acc[ele.name] = null
-                            return acc
-                        }, {})}
-                        onChange={event => {
-                            const ingredient = this.props.ingredientsByUser.find(ele => ele.name === event.target.value)
-                            if(ingredient){
-                                this.handleNameAutoComplete(index, ingredient)    
-                            }
-                            else if (event.target.value) {
-                                this.handleNameChange(index,'name', event.target.value)
-                            }
-                        }}
-                        onAutocomplete={ingredientName => {
-                            console.log('name', ingredientName)
-                            const ingredient = this.props.ingredientsByUser.find(ele => ele.name === ingredientName)
-                            this.handleNameAutoComplete(index, ingredient)
-                        }}
+                      title="Ingredient"
+                      data={this.props.ingredientsByUser.reduce((acc, ele) => {
+                        acc[ele.name] = null;
+                        return acc;
+                      }, {})}
+                      onChange={event => {
+                        const ingredient = this.props.ingredientsByUser.find(
+                          ele => ele.name === event.target.value
+                        );
+                        if (ingredient) {
+                          this.handleNameAutoComplete(index, ingredient);
+                        } else if (event.target.value) {
+                          this.handleNameChange(
+                            index,
+                            "name",
+                            event.target.value
+                          );
+                        }
+                      }}
+                      onAutocomplete={ingredientName => {
+                        const ingredient = this.props.ingredientsByUser.find(
+                          ele => ele.name === ingredientName
+                        );
+                        this.handleNameAutoComplete(index, ingredient);
+                      }}
                     />
                   </Row>
                 );
               })}
               <Row className="center-align">
-              <div onClick={this.addNewIngredient}><i className="fas fa-plus-circle" /></div>
+                <div onClick={this.addNewIngredient}>
+                  <i className="fas fa-plus-circle" />
+                </div>
               </Row>
               <Input
                 value={this.state.instructions}
@@ -187,7 +207,11 @@ class Cookbook extends Component {
   }
 }
 
-const mapStateToProps = ({ recipesByUser, ingredientsByUser, oneRecipeByUser }) => ({
+const mapStateToProps = ({
+  recipesByUser,
+  ingredientsByUser,
+  oneRecipeByUser
+}) => ({
   recipesByUser,
   ingredientsByUser,
   oneRecipeByUser
@@ -195,7 +219,12 @@ const mapStateToProps = ({ recipesByUser, ingredientsByUser, oneRecipeByUser }) 
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    { getAllRecipes, getAllIngredientsUserPosseses, createNewRecipe, getOneRecipe },
+    {
+      getAllRecipes,
+      getAllIngredientsUserPosseses,
+      createNewRecipe,
+      getOneRecipe
+    },
     dispatch
   );
 

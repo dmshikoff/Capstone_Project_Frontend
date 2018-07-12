@@ -10,6 +10,8 @@ export const CREATE_NEW_OWNED_INGREDIENT = "CREATE_NEW_OWNED_INGREDIENT";
 export const CREATE_NEW_PLAN = "CREATE_NEW_PLAN";
 export const GET_ONE_PLAN = "GET_ONE_PLAN";
 export const GET_PLANNED_RECIPES_BY_DAY = "GET_PLANNED_RECIPES_BY_DAY";
+export const GET_ALL_INGREDIENTS_USED = "GET_ALL_INGREDIENTS_USED";
+export const ADD_TO_INGREDIENTS = "ADD_TO_INGREDIENTS";
 
 export const getAllIngredientsUserPosseses = userId => {
   return dispatch => {
@@ -24,23 +26,41 @@ export const getAllIngredientsUserPosseses = userId => {
   };
 };
 
-export const createNewOwnedIngredient = (
-  user_id,
-  { name, quantity, units }
-) => {
+export const createNewOwnedIngredient = (user_id, { name, quantity, units }) => {
   return dispatch => {
-    request(`/users/${user_id}/ingredients`, "post", {
-      name,
-      quantity,
-      units
-    }).then(response => {
-      dispatch({
-        type: CREATE_NEW_OWNED_INGREDIENT,
-        payload: response.data.data
+    request(`/users/${user_id}/ingredients`, "post", {name, quantity, units})
+      .then(response => {
+        dispatch({
+          type: CREATE_NEW_OWNED_INGREDIENT,
+          payload: response.data.data
+        });
       });
-    });
   };
 };
+
+export const getAllIngredientsUsed = (user_id) => {
+  return dispatch => {
+    request(`/users/${user_id}/ingredients/onHand`)
+      .then(response => {
+        dispatch({
+          type: GET_ALL_INGREDIENTS_USED,
+          payload: response.data.allIngredients
+        })
+      })
+  }
+}
+
+export const addToIngredient = (user_id, ingredientInfo) => {
+  return dispatch => {
+    request(`/users/${user_id}/ingredients`, "post", {user_id, name: ingredientInfo.name, quantity: ingredientInfo.quantity, unit: ingredientInfo.unit, id: ingredientInfo.id})
+      .then(response => {
+        dispatch({
+          type: ADD_TO_INGREDIENTS,
+          payload: response.data.data
+        })
+      })
+  }
+}
 
 export const getAllRecipes = userId => {
   return dispatch => {
@@ -64,13 +84,7 @@ export const getOneRecipe = (userId, recipeId) => {
   };
 };
 
-export const createNewRecipe = (
-  name,
-  instructions,
-  user_id,
-  ingredientsArray,
-  cb
-) => {
+export const createNewRecipe = (name, instructions, user_id, ingredientsArray, cb) => {
   return dispatch => {
     request(`/users/${user_id}/recipes`, "post", {
       name,

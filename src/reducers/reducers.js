@@ -9,7 +9,9 @@ import {
   CREATE_NEW_OWNED_INGREDIENT,
   CREATE_NEW_PLAN,
   GET_ONE_PLAN,
-  GET_PLANNED_RECIPES_BY_DAY
+  GET_PLANNED_RECIPES_BY_DAY,
+  GET_ALL_INGREDIENTS_USED,
+  ADD_TO_INGREDIENTS
 } from "../actions/actions.js";
 
 const ingredientsByUser = (state = [], action) => {
@@ -102,6 +104,24 @@ const plannedRecipesByDay = (state = [], action) => {
   }
 };
 
+const allIngredientsUsed = (state = [], action) => {
+  switch (action.type) {
+    case GET_ALL_INGREDIENTS_USED:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+const addedIngredient = (state = [], action) => {
+  switch (action.type) {
+    case ADD_TO_INGREDIENTS:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   ingredientsByUser,
   recipesByUser,
@@ -112,5 +132,7 @@ export default combineReducers({
   createUserOwnedIngredient,
   newPlan,
   onePlan,
-  plannedRecipesByDay
+  plannedRecipesByDay,
+  allIngredientsUsed,
+  addedIngredient
 });

@@ -5,7 +5,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
   createNewOwnedIngredient,
-  getAllIngredientsUserPosseses
+  getAllIngredientsUserPosseses,
+  getAllIngredientsUsed,
+  addToIngredient
 } from "../actions/actions.js";
 
 class AddIngredientForm extends Component {
@@ -13,6 +15,7 @@ class AddIngredientForm extends Component {
     super(props);
 
     this.state = {
+      id: "",
       name: "",
       quantity: "",
       unit: ""
@@ -21,9 +24,11 @@ class AddIngredientForm extends Component {
 
   componentDidMount = () => {
     this.props.getAllIngredientsUserPosseses(this.props.authState.id);
+    this.props.getAllIngredientsUsed(this.props.authState.id);
   };
 
   render() {
+    console.log(this.props.addedIngredient)
     return (
       <div>
         <Row className="center-align ingredient-title-row">
@@ -34,15 +39,30 @@ class AddIngredientForm extends Component {
             className="ingredient-form"
             onSubmit={event => {
               event.preventDefault();
+              this.props.addToIngredient(this.props.authState.id, this.state)
             }}
           >
             <Autocomplete
               title="Ingredient Name"
-              data={this.props.ingredientsByUser.reduce((acc, ele) => {
+              data={this.props.allIngredientsUsed.reduce((acc, ele) => {
                 acc[ele.name] = null;
                 return acc;
               }, {})}
-
+              onChange = {event => {
+                if(event.target.value !== undefined){
+                  const i = this.props.allIngredientsUsed.find(e => e.name === event.target.value)
+                  if(i){
+                    this.setState({name: i.name, id: i.id})    
+                  }
+                  else {
+                    this.setState({name:event.target.value, id:undefined})
+                  }
+                }
+              }}
+              onAutocomplete = {ingredientName => {
+                const i = this.props.allIngredientsUsed.find(e => e.name === ingredientName)
+                this.setState({name: i.name, id: i.id})
+              }}
             />
             <Input
               label="Quantity"
@@ -54,17 +74,21 @@ class AddIngredientForm extends Component {
             <Input
               label="Unit"
               type="select"
-              defaultValue="1"
+              defaultValue="empty"
               onChange={event => {
                 this.setState({ unit: event.target.value });
               }}
             >
-              <option value="ounce(s)">ounce(s)</option>
-              <option value="fluid ounce(s)">fluid ounce(s)</option>
-              <option value="cup(s)">cup(s)</option>
-              <option value="pint(s)">pint(s)</option>
-              <option value="quart(s)">quart(s)</option>
-              <option value="gallon(s)">gallon(s)</option>
+              <option value="empty" label="disabled" disabled></option>
+              <option value="ml">milliliter(s)/ml</option>
+              <option value="l">liter(s)/l</option>
+              <option value="fl-oz">fluid ounce(s)/fl-oz</option>
+              <option value="tsp">teaspoon(s)/tsp</option>
+              <option value="Tbs">Tablespoon(s)/Tbsp</option>
+              <option value="cup">cup(s)/cp</option>
+              <option value="pnt">pint(s)/pt</option>
+              <option value="qt">quart(s)/q</option>
+              <option value="gal">gallon(s)/gal</option>
               <option value="count">count</option>
             </Input>
             <Button waves="light" className="add-ingredient-button-form-submit">Add</Button>
@@ -75,14 +99,16 @@ class AddIngredientForm extends Component {
   }
 }
 
-const mapStateToProps = ({ createUserOwnedIngredient, ingredientsByUser }) => ({
+const mapStateToProps = ({ createUserOwnedIngredient, ingredientsByUser, allIngredientsUsed, addedIngredient }) => ({
   createUserOwnedIngredient,
-  ingredientsByUser
+  ingredientsByUser,
+  allIngredientsUsed,
+  addedIngredient
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    { createNewOwnedIngredient, getAllIngredientsUserPosseses },
+    { createNewOwnedIngredient, getAllIngredientsUserPosseses, getAllIngredientsUsed, addToIngredient },
     dispatch
   );
 

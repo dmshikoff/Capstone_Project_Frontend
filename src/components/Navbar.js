@@ -11,7 +11,7 @@ const Nav = props => {
     <Navbar brand={img} right>
       {
         props.authState ?
-        <NavItem onClick={() => props.history.push("./Dashboard")}>
+        <NavItem onClick={() => props.history.push("/dashboard")}>
           My Dashboard
         </NavItem> : 
         <NavItem>

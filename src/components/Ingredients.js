@@ -67,6 +67,13 @@ class Ingredients extends Component {
               trigger={<img className="info-img" src={info} alt="info" />}
             >
               <ol>
+                <li>All units are by volume or count total. If you purchased an ingredient that is sold by weight, take a look at the nutitional facts. The serving size is most often in volume. To get the total, multiply the serving size by the servings per container.
+                <ul>
+                <li>
+                *For example, flour is typically sold by the pound. The serving size for flour is about 1/4 cup. If the number of servings per container is 15, you would multiply 1/4 by 15, which is 3 3/4 cups total.
+                </li>
+                </ul>
+                </li>
                 <li>Enter in a value for Name, Quantity and Unit</li>
                 <li>
                   Choose whether or not you wish to add the ingredient to your
