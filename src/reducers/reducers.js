@@ -11,7 +11,9 @@ import {
   GET_ONE_PLAN,
   GET_PLANNED_RECIPES_BY_DAY,
   GET_ALL_INGREDIENTS_USED,
-  ADD_TO_INGREDIENTS
+  ADD_TO_INGREDIENTS,
+  REMOVE_FROM_INGREDIENTS,
+  ERR_MESSAGE
 } from "../actions/actions.js";
 
 const ingredientsByUser = (state = [], action) => {
@@ -122,6 +124,24 @@ const addedIngredient = (state = [], action) => {
   }
 }
 
+const removedIngredient = (state = [], action) => {
+  switch (action.type) {
+    case REMOVE_FROM_INGREDIENTS:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+const errorMessage = (state = [], action) => {
+  switch (action.type) {
+    case ERR_MESSAGE:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   ingredientsByUser,
   recipesByUser,
@@ -134,5 +154,7 @@ export default combineReducers({
   onePlan,
   plannedRecipesByDay,
   allIngredientsUsed,
-  addedIngredient
+  addedIngredient,
+  removedIngredient,
+  errorMessage
 });

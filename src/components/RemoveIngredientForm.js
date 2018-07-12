@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { Row, Input, Button, Autocomplete } from "react-materialize";
+import { Row, Input, Button } from "react-materialize";
 import { withAuthentication } from "../helpers";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import {
-  getAllIngredientsUserPosseses
+  getAllIngredientsUserPosseses,
+  getAllIngredientsUsed,
+  removeFromIngredient
 } from "../actions/actions.js";
 
 class RemoveIngredientForm extends Component {
@@ -12,6 +14,7 @@ class RemoveIngredientForm extends Component {
     super(props);
 
     this.state = {
+      id: "",
       name: "",
       quantity: "",
       unit: ""
@@ -20,6 +23,7 @@ class RemoveIngredientForm extends Component {
 
   componentDidMount = () => {
     this.props.getAllIngredientsUserPosseses(this.props.authState.id);
+    this.props.getAllIngredientsUsed(this.props.authState.id);
   };
 
   render() {
@@ -33,18 +37,47 @@ class RemoveIngredientForm extends Component {
             className="ingredient-form"
             onSubmit={event => {
               event.preventDefault();
+              this.props.removeFromIngredient(
+                this.props.authState.id,
+                this.state,
+                dispatch =>
+                  dispatch(() =>
+                    this.props.getAllIngredientsUserPosseses(
+                      this.props.authState.id
+                    )
+                  )
+              );
             }}
           >
-            <Autocomplete
-              title="Ingredient Name"
-              data={this.props.ingredientsByUser.reduce((acc, ele) => {
-                acc[ele.name] = null;
-                return acc;
-              }, {})}
-              
-            />
+            <Input
+              type="select"
+              label="Ingredient Name"
+              value={this.state.name}
+              onChange={event => {
+                if (event.target.value !== undefined) {
+                  const i = this.props.allIngredientsUsed.find(
+                    e => e.name === event.target.value
+                  );
+                  if (i) {
+                    this.setState({ name: i.name, id: i.id });
+                  } else {
+                    this.setState({ name: event.target.value, id: undefined });
+                  }
+                }
+              }}
+            >
+              <option value=''>-- Select a Thing--</option>
+              {this.props.ingredientsByUser.map(ele => {
+                return (
+                  <option key={ele.id} value={ele.name}>
+                    {ele.name}
+                  </option>
+                );
+              })}
+            </Input>
             <Input
               label="Quantity"
+              type="number"
               value={this.state.quantity}
               onChange={event => {
                 this.setState({ quantity: event.target.value });
@@ -53,38 +86,60 @@ class RemoveIngredientForm extends Component {
             <Input
               label="Unit"
               type="select"
-              defaultValue="empty"
+              value={this.state.unit}
               onChange={event => {
                 this.setState({ unit: event.target.value });
               }}
             >
-              <option value="empty" label="disabled" disabled></option>
-              <option value="milliliter(s)/ml">milliliter(s)/ml</option>
-              <option value="liter(s)/l">liter(s)/l</option>
-              <option value="fluid ounce(s)/fl-oz">fluid ounce(s)/fl-oz</option>
-              <option value="teaspoon(s)/tsp">teaspoon(s)/tsp</option>
-              <option value="Tablespoon(s)/Tbsp">Tablespoon(s)/Tbsp</option>
-              <option value="cup(s)/cp">cup(s)/cp</option>
-              <option value="pint(s)/pt">pint(s)/pt</option>
-              <option value="quart(s)/qt">quart(s)/q</option>
-              <option value="gallon(s)/gal">gallon(s)/gal</option>
+              <option value="empty" />
+              <option value="ml">milliliter(s)/ml</option>
+              <option value="l">liter(s)/l</option>
+              <option value="fl-oz">fluid ounce(s)/fl-oz</option>
+              <option value="tsp">teaspoon(s)/tsp</option>
+              <option value="Tbs">Tablespoon(s)/Tbsp</option>
+              <option value="cup">cup(s)/cp</option>
+              <option value="pnt">pint(s)/pt</option>
+              <option value="qt">quart(s)/q</option>
+              <option value="gal">gallon(s)/gal</option>
               <option value="count">count</option>
             </Input>
-            <Button waves="light" className="remove-ingredient-button-form-submit">Remove</Button>
+            <Button
+              waves="light"
+              className="remove-ingredient-button-form-submit"
+            >
+              Remove
+            </Button>
           </form>
+          <Row>
+          {
+            this.props.errorMessage ? <p>{this.props.errorMessage.message}</p> : null
+          }
+          </Row>
         </Row>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ ingredientsByUser }) => ({
-  ingredientsByUser
+const mapStateToProps = ({
+  ingredientsByUser,
+  allIngredientsUsed,
+  removedIngredient,
+  errorMessage
+}) => ({
+  ingredientsByUser,
+  allIngredientsUsed,
+  removedIngredient,
+  errorMessage
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    { getAllIngredientsUserPosseses },
+    {
+      getAllIngredientsUserPosseses,
+      getAllIngredientsUsed,
+      removeFromIngredient
+    },
     dispatch
   );
 

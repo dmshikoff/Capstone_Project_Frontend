@@ -1,5 +1,6 @@
 import axios from "axios";
 import { request } from "../helpers/";
+export const ERR_MESSAGE = "ERR_MESSAGE";
 export const GET_INGREDIENTS_BY_USER = "GET_INGREDIENTS_BY_USER";
 export const GET_RECIPES_BY_USER = "GET_RECIPES_BY_USER";
 export const CREATE_NEW_RECIPE = "CREATE_NEW_RECIPE";
@@ -12,6 +13,7 @@ export const GET_ONE_PLAN = "GET_ONE_PLAN";
 export const GET_PLANNED_RECIPES_BY_DAY = "GET_PLANNED_RECIPES_BY_DAY";
 export const GET_ALL_INGREDIENTS_USED = "GET_ALL_INGREDIENTS_USED";
 export const ADD_TO_INGREDIENTS = "ADD_TO_INGREDIENTS";
+export const REMOVE_FROM_INGREDIENTS = "REMOVE_FROM_INGREDIENTS";
 
 export const getAllIngredientsUserPosseses = userId => {
   return dispatch => {
@@ -50,13 +52,35 @@ export const getAllIngredientsUsed = (user_id) => {
   }
 }
 
-export const addToIngredient = (user_id, ingredientInfo) => {
+export const addToIngredient = (user_id, ingredientInfo, cb) => {
   return dispatch => {
-    request(`/users/${user_id}/ingredients`, "post", {user_id, name: ingredientInfo.name, quantity: ingredientInfo.quantity, unit: ingredientInfo.unit, id: ingredientInfo.id})
-      .then(response => {
+    request(`/users/${user_id}/ingredients`, 'post', {user_id, name: ingredientInfo.name, quantity: ingredientInfo.quantity, unit: ingredientInfo.unit, id: ingredientInfo.id})
+      .then(async response => {
         dispatch({
           type: ADD_TO_INGREDIENTS,
           payload: response.data.data
+        })
+
+        if(cb) cb(dispatch)
+      })
+      
+  }
+}
+
+export const removeFromIngredient = (user_id, ingredientInfo, cb) => {
+  return dispatch => {
+    request(`/users/${user_id}/ingredients/remove`, 'post', {user_id, name: ingredientInfo.name, quantity: ingredientInfo.quantity, unit: ingredientInfo.unit, id: ingredientInfo.id})
+      .then(response => {
+        dispatch({
+          type: REMOVE_FROM_INGREDIENTS,
+          payload: response.data.data
+        })
+        if(cb) cb(dispatch)
+      })
+      .catch(err => {
+        dispatch({
+          type: ERR_MESSAGE,
+          payload: err.response.data
         })
       })
   }
@@ -96,7 +120,8 @@ export const createNewRecipe = (name, instructions, user_id, ingredientsArray, c
         type: CREATE_NEW_RECIPE,
         payload: response.data
       });
-      if (cb) cb();
+      
+      if(cb) cb(dispatch)
     });
   };
 };

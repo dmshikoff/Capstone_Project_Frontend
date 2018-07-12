@@ -106,8 +106,8 @@ class Cookbook extends Component {
                   this.state.instructions,
                   this.props.authState.id,
                   this.state.ingredients,
-                  () => {
-                    this.props.getAllRecipes(this.props.authState.id);
+                  (dispatch) => {
+                    dispatch(() => this.props.getAllRecipes(this.props.authState.id));
                   }
                 );
               }}
