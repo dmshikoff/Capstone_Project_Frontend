@@ -106,10 +106,17 @@ class Cookbook extends Component {
                   this.state.instructions,
                   this.props.authState.id,
                   this.state.ingredients,
-                  (dispatch) => {
-                    dispatch(() => this.props.getAllRecipes(this.props.authState.id));
+                  dispatch => {
+                    dispatch(() =>
+                      this.props.getAllRecipes(this.props.authState.id)
+                    );
                   }
                 );
+                this.setState({
+                  name: "",
+                  ingredients: [{ qty: "", unit: "", name: "" }],
+                  instructions: ""
+                });
               }}
             >
               <Input
@@ -140,16 +147,16 @@ class Cookbook extends Component {
                         this.handleNameChange(index, "unit", event.target.value)
                       }
                     >
-                      <option value="empty" label="disabled" disabled></option>
-                      <option value="milliliter(s)/ml">milliliter(s)/ml</option>
-                      <option value="liter(s)/l">liter(s)/l</option>
-                      <option value="fluid ounce(s)/fl-oz">fluid ounce(s)/fl-oz</option>
-                      <option value="teaspoon(s)/tsp">teaspoon(s)/tsp</option>
-                      <option value="Tablespoon(s)/Tbsp">Tablespoon(s)/Tbsp</option>
-                      <option value="cup(s)/cp">cup(s)/cp</option>
-                      <option value="pint(s)/pt">pint(s)/pt</option>
-                      <option value="quart(s)/qt">quart(s)/q</option>
-                      <option value="gallon(s)/gal">gallon(s)/gal</option>
+                      <option value="empty" />
+                      <option value="ml">milliliter(s)/ml</option>
+                      <option value="l">liter(s)/l</option>
+                      <option value="fl-oz">fluid ounce(s)/fl-oz</option>
+                      <option value="tsp">teaspoon(s)/tsp</option>
+                      <option value="Tbs">Tablespoon(s)/Tbsp</option>
+                      <option value="cup">cup(s)/cp</option>
+                      <option value="pnt">pint(s)/pt</option>
+                      <option value="qt">quart(s)/q</option>
+                      <option value="gal">gallon(s)/gal</option>
                       <option value="count">count</option>
                     </Input>
                     <Autocomplete

@@ -35,15 +35,22 @@ class Recipe extends Component {
             <h2>{this.props.oneRecipeByUser.name}</h2>
           </Row>
           <div className="divider" />
-          <Row className="center-align">
+          <Row>
+          <Row className="recipe-ingredients-list-row">
           <h4>Ingredients</h4>
-            <ul>
+          </Row>
+          <Row className="recipe-ingredients-list">
+            <ol>
               {this.props.ingredientsByRecipe.map(ele => {
                 return <li key={ele.name}>{ele.quantity}{" "}{ele.units}{" "}{ele.name}</li>;
               })}
-            </ul>
+            </ol>
+            </Row>
           </Row>
           <Row className="recipe-instruction-row">
+          <Row className="center-align">
+          <h4>Instructions</h4>
+          </Row>
           <Col className="recipe-instruction-col">
           {this.props.oneRecipeByUser.instructions}      
           </Col> 

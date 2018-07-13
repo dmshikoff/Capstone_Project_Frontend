@@ -1,14 +1,34 @@
 .complete-recipe-row {
-    background: url("../images/restaurant_icons.png") top repeat;
+  background: url("../images/restaurant_icons.png") top repeat;
 }
 
 .recipe-instruction-row {
-    display: flex;
-    justify-content: center;
-    max-width: 75%;
+  display: flex;
+  justify-content: center;
+  max-width: 75%;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.recipe-ingredients-list-row,
+.recipe-ingredients-list {
+  display: flex;
+  justify-content: center;
 }
 
 .recipe-instruction-col {
-    width: 100%;
+  width: 100%;
 }
 
+ol {
+  counter-reset: item;
+}
+ol li {
+  display: block;
+}
+
+ol li:before {
+  content: counter(item) ". ";
+  counter-increment: item;
+  font-weight: bold;
+}

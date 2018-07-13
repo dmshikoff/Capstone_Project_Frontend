@@ -13,7 +13,9 @@ import {
   GET_ALL_INGREDIENTS_USED,
   ADD_TO_INGREDIENTS,
   REMOVE_FROM_INGREDIENTS,
-  ERR_MESSAGE
+  ERR_MESSAGE,
+  IMPLEMENT_PLAN,
+  GROCERY_LIST
 } from "../actions/actions.js";
 
 const ingredientsByUser = (state = [], action) => {
@@ -142,6 +144,24 @@ const errorMessage = (state = [], action) => {
   }
 }
 
+const groceryList = (state = [], action) => {
+  switch (action.type) {
+    case GROCERY_LIST:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
+const implementedPlan = (state = [], action) => {
+  switch (action.type) {
+    case IMPLEMENT_PLAN:
+      return action.payload;
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   ingredientsByUser,
   recipesByUser,
@@ -156,5 +176,7 @@ export default combineReducers({
   allIngredientsUsed,
   addedIngredient,
   removedIngredient,
-  errorMessage
+  errorMessage,
+  groceryList,
+  implementedPlan
 });
