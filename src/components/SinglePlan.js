@@ -83,15 +83,25 @@ class SinglePlan extends Component {
             <h2>{this.props.onePlan.name}</h2>
             <Modal
               header="Add/Remove Ingredient Help"
-              trigger={<img className="single-plan-info-img" src={info} alt="info" />}
+              trigger={
+                <img className="single-plan-info-img" src={info} alt="info" />
+              }
             >
               <ol>
-                <li>All units are by volume or count total. If you purchased an ingredient that is sold by weight, take a look at the nutitional facts. The serving size is most often in volume. To get the total, multiply the serving size by the servings per container.
-                <ul>
                 <li>
-                *For example, flour is typically sold by the pound. The serving size for flour is about 1/4 cup. If the number of servings per container is 15, you would multiply 1/4 by 15, which is 3 3/4 cups total.
-                </li>
-                </ul>
+                  All units are by volume or count total. If you purchased an
+                  ingredient that is sold by weight, take a look at the
+                  nutitional facts. The serving size is most often in volume. To
+                  get the total, multiply the serving size by the servings per
+                  container.
+                  <ul>
+                    <li>
+                      *For example, flour is typically sold by the pound. The
+                      serving size for flour is about 1/4 cup. If the number of
+                      servings per container is 15, you would multiply 1/4 by
+                      15, which is 3 3/4 cups total.
+                    </li>
+                  </ul>
                 </li>
                 <li>Enter in a value for Name, Quantity and Unit</li>
                 <li>
@@ -99,15 +109,23 @@ class SinglePlan extends Component {
                   pantry or remove it.
                   <ul>
                     <li>
-                    *Note that ingredients are automatically removed from your pantry if they are used in a plan that you have implemented.<span className="bold-text"> They do not need to be manually removed.</span>
+                      *Note that ingredients are automatically removed from your
+                      pantry if they are used in a plan that you have
+                      implemented.<span className="bold-text">
+                        {" "}
+                        They do not need to be manually removed.
+                      </span>
                     </li>
                   </ul>
                 </li>
                 <li>
-                If you wish to update the quantity, for eample, if the ingredient spoiled, select "Remove" and CICI will search for the existing ingredient and sbutract the quantity entered.
+                  If you wish to update the quantity, for eample, if the
+                  ingredient spoiled, select "Remove" and CICI will search for
+                  the existing ingredient and sbutract the quantity entered.
                 </li>
                 <li>
-                For an easier and faster approach to adding and removing ingredients, download our Alexa Skill and use your Echo! 
+                  For an easier and faster approach to adding and removing
+                  ingredients, download our Alexa Skill and use your Echo!
                 </li>
               </ol>
             </Modal>
@@ -320,7 +338,12 @@ class SinglePlan extends Component {
                 {this.props.groceryList.map(ele => {
                   let result;
                   if (ele.quantity < 0) {
-                    window.open(`http://localhost:3000/printableplan/${this.props.match.params.id}`, '_blank')
+                    window.open(
+                      `http://localhost:3000/printableplan/${
+                        this.props.match.params.id
+                      }`,
+                      "_blank"
+                    );
                   } else {
                     result =
                       "You currently possess the required amount of ingredients to implement this meal plan";
@@ -328,6 +351,8 @@ class SinglePlan extends Component {
                   return result;
                 })}
               </ul>
+            </Col>
+            <Col>
               <p>
                 {this.state.implemented
                   ? "Your plan has been implemented and the ingredients have been deducted from your pantry!"

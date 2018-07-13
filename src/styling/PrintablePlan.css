@@ -34,10 +34,7 @@
   .printable-plan-grocery-list *{
     visibility: visible;
   }
+  body { margin: 1.6cm; }
   
 }
 
-@media print {
-    @page { margin: 0; }
-    body { margin: 1.6cm; }
-  }

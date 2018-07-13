@@ -4,9 +4,11 @@ import "../styling/HowItWorks.css";
 import fridge from "../images/fridge.svg";
 import recipe from "../images/recipes.svg";
 import calendar from "../images/calendar.svg";
+import { withAuthentication } from "../helpers";
 import { withRouter } from "react-router-dom"
 
 const HowItWorks = (props) => {
+  console.log(props)
   return (
     <div className="how-it-works-div">
       <Row>
@@ -48,7 +50,12 @@ const HowItWorks = (props) => {
       <Row className="get-started-button-row">
       <Button
       onClick={() => {
-        props.history.push('./login')
+        if(props.authState){
+          props.history.push('/dashboard/')
+        }
+        else{
+          props.history.push('./login')
+        }
       }}
       >
       Get Started Now
@@ -58,4 +65,4 @@ const HowItWorks = (props) => {
   );
 };
 
-export default withRouter(HowItWorks);
+export default withRouter(withAuthentication(HowItWorks));
