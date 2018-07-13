@@ -10,6 +10,7 @@ import Cookbook from "./Cookbook";
 import Plans from "./Plans";
 import Recipe from "./Recipe"
 import SinglePlan from "./SinglePlan"
+import PrintablePlan from "./PrintablePlan"
 import "../styling/App.css";
 
 class App extends Component {
@@ -25,6 +26,7 @@ class App extends Component {
           <AuthenticatedRoute exact path="/plans" component={Plans} />
           <AuthenticatedRoute exact path="/recipes/:id" component={Recipe} />
           <AuthenticatedRoute exact path="/plans/:id" component={SinglePlan} />
+          <AuthenticatedRoute exact path="/printableplan/:id" component={PrintablePlan} />
         </Switch>
       </BrowserRouter>
     );

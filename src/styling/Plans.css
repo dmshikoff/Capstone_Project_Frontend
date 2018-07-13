@@ -36,7 +36,7 @@
 
 .save-plan-button {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     margin: 10px 10px;
 }
 
@@ -55,4 +55,21 @@
 .grocery-list-row {
     display: flex;
     justify-content: center;
+}
+
+.save-plan-button:after {
+    content: none;
+    display: none;
+    clear: none;
+}
+
+.single-plan-title-row {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.single-plan-info-img {
+    width: 20px;
+    padding-top: 20px;
 }

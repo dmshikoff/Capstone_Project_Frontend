@@ -1,0 +1,43 @@
+.printable-plan-row {
+  min-height: 100vh;
+  background: url("../images/restaurant_icons.png") top repeat;
+}
+
+.printable-plan-grocery-list {
+  width: 30%;
+  margin-bottom: 25px;
+}
+
+.printable-plan-list-buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+}
+
+.printable-plan-list-buttons:after {
+  content: none;
+  display: none;
+  clear: none;
+}
+
+@media print {
+    @page { 
+        margin:0 
+    }
+
+  body * {
+    visibility: hidden;
+  }
+  .printable-plan-title-row  *{
+    visibility: visible;
+  }
+  .printable-plan-grocery-list *{
+    visibility: visible;
+  }
+  
+}
+
+@media print {
+    @page { margin: 0; }
+    body { margin: 1.6cm; }
+  }

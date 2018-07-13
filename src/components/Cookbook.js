@@ -165,6 +165,7 @@ class Cookbook extends Component {
                         acc[ele.name] = null;
                         return acc;
                       }, {})}
+                      value={ele.name}
                       onChange={event => {
                         const ingredient = this.props.ingredientsByUser.find(
                           ele => ele.name === event.target.value
