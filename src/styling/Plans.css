@@ -3,6 +3,16 @@
     background: url("../images/restaurant_icons.png") top repeat;
 }
 
+.my-plans-title-row > div {
+    display: inline;
+}
+
+.plan-info-img {
+    margin-bottom: 20px;
+    width: 20px;
+    cursor: pointer;
+}
+
 .new-plan-row {
     display: flex;
     justify-content: center;

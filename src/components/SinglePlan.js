@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col, Button, Modal } from "react-materialize";
+import { Row, Col, Button } from "react-materialize";
 import {
   getAllPlansByUser,
   getAllRecipes,
@@ -15,7 +15,6 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import info from "../images/info-circle.svg";
 import "../styling/Plans.css";
 
 class SinglePlan extends Component {
@@ -79,56 +78,8 @@ class SinglePlan extends Component {
       <div>
         <Navbar />
         <Row className="plans-row">
-          <Row className="single-plan-title-row">
+          <Row className="center-align">
             <h2>{this.props.onePlan.name}</h2>
-            <Modal
-              header="Add/Remove Ingredient Help"
-              trigger={
-                <img className="single-plan-info-img" src={info} alt="info" />
-              }
-            >
-              <ol>
-                <li>
-                  All units are by volume or count total. If you purchased an
-                  ingredient that is sold by weight, take a look at the
-                  nutitional facts. The serving size is most often in volume. To
-                  get the total, multiply the serving size by the servings per
-                  container.
-                  <ul>
-                    <li>
-                      *For example, flour is typically sold by the pound. The
-                      serving size for flour is about 1/4 cup. If the number of
-                      servings per container is 15, you would multiply 1/4 by
-                      15, which is 3 3/4 cups total.
-                    </li>
-                  </ul>
-                </li>
-                <li>Enter in a value for Name, Quantity and Unit</li>
-                <li>
-                  Choose whether or not you wish to add the ingredient to your
-                  pantry or remove it.
-                  <ul>
-                    <li>
-                      *Note that ingredients are automatically removed from your
-                      pantry if they are used in a plan that you have
-                      implemented.<span className="bold-text">
-                        {" "}
-                        They do not need to be manually removed.
-                      </span>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  If you wish to update the quantity, for eample, if the
-                  ingredient spoiled, select "Remove" and CICI will search for
-                  the existing ingredient and sbutract the quantity entered.
-                </li>
-                <li>
-                  For an easier and faster approach to adding and removing
-                  ingredients, download our Alexa Skill and use your Echo!
-                </li>
-              </ol>
-            </Modal>
           </Row>
           <div className="divider" />
           <Row>
