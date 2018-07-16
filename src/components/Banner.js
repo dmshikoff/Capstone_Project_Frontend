@@ -7,7 +7,7 @@ const Banner = () => {
     <div className="banner">
       <Row>
         <Col className="center-align banner-text">
-        <h2>Welcome to Meal Prepping made easy</h2>
+        <h2>Welcome to Meal Planning made easy</h2>
         <h5>Manage your pantry, recipes and meal plans all from one location</h5>
         </Col>
       </Row>

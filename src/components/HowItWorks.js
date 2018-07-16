@@ -24,7 +24,7 @@ const HowItWorks = (props) => {
           <h5>Track your ingredients</h5>
           <p>
             It's as simple as <span className="bold-text">asking Alexa to add the ingredient and quantity.</span> Don't have an Amazon Echo?
-            You can still enter your ingredients directly from your account page.
+            You can still enter your ingredients directly from your dashboard.
           </p>
         </Col>
         <Col s={4} className="recipe-col center-align">

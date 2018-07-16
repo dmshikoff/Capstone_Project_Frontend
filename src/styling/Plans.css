@@ -1,4 +1,5 @@
 .plans-row {
+    min-height: 66vh;
     background: url("../images/restaurant_icons.png") top repeat;
 }
 

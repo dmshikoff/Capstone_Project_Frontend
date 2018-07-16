@@ -1,20 +1,35 @@
 import React from "react";
-import { Row, Col } from "react-materialize";
+import { Row, Col, Modal } from "react-materialize";
 import { withRouter } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import fridge from "../images/fridge.svg";
 import recipe from "../images/recipes.svg";
 import calendar from "../images/calendar.svg";
+import info from "../images/info-circle.svg";
 import "../styling/Dashboard.css";
 
 const Dashboard = (props) => {
   return (
     <div>
       <Navbar />
-      <div className="dashboard-div">
+      <Row className="dashboard-div">
         <Row className="center-align">
-          <h2>My Dashboard</h2>
+          <h2 className="my-dashboard-title-row">My Dashboard <Modal
+              header="Dashboard Help"
+              trigger={<img className="dash-info-img" src={info} alt="info" />}
+            >
+              <ul>
+                <li>Select any of the three options below to get started.</li>
+                <li>Each one will take you to a different module within this site.</li>
+                <ul>
+                <li>• To manage your Pantry, such as adding and removing ingredients select My Pantry</li>
+                <li>• To manage your Cookbook, where you are add recipes and keep track of all your recipes, select My Cookbook</li>
+                <li>• Finally, to create new meal plans, generate grocery lists, or implement existing meal plans, select My Plans</li>
+                </ul>
+              </ul>
+            </Modal></h2>
+          
         </Row>
         <div className="divider" />
         <Row className="path-row">
@@ -71,7 +86,7 @@ const Dashboard = (props) => {
             </ul>
           </Col>
         </Row>
-      </div>
+      </Row>
       <Footer />
     </div>
   );

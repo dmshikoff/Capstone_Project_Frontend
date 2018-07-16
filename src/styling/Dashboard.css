@@ -7,6 +7,20 @@
     height: 55vh;
 }
 
+.my-dashboard-title-row:after {
+    content: none;
+}
+
+.my-dashboard-title-row > div {
+    display: inline;
+}
+
+.dash-info-img {
+    margin-bottom: 15px;
+    width: 20px;
+    cursor: pointer;
+}
+
 .fridge-col, .recipe-col, .calendar-col {
     cursor: pointer;
 }
