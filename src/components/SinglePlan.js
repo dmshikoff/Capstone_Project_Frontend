@@ -298,23 +298,6 @@ class SinglePlan extends Component {
                 null :
                 <p>You currently possess the required amount of ingredients to implement this meal plan</p>
               }
-
-
-                {/* {this.props.groceryList.map(ele => {
-                  let result;
-                  if (ele.quantity < 0) {
-                    window.open(
-                      `http://localhost:3000/printableplan/${
-                        this.props.match.params.id
-                      }`,
-                      "_blank"
-                    );
-                  } else {
-                    result =
-                      "You currently possess the required amount of ingredients to implement this meal plan";
-                  }
-                  return result;
-                })} */}
             </Col>
             <Col>
               <p>

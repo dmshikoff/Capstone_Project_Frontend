@@ -63,7 +63,7 @@ class PrintablePlan extends Component {
                   );
                 })
                 const listString = `<ol>${result}</ol>`
-              request(`/users/${this.props.authState.id}/plans/${this.props.match.params.id}/email`, 'post', {listString})
+              request(`/users/${this.props.authState.id}/plans/${this.props.match.params.id}/email`, 'post', {listString, email:this.props.authState.email})
           }}
           >Email List</Button>
           </Row>
