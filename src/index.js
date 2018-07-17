@@ -16,6 +16,8 @@ request('/auth/token')
 
 const store = createStore(reducers, applyMiddleware(thunk))
 
+window.env = process.env.REACT_APP_BACKEND
+
 ReactDOM.render(
   <Provider store={store} >
     <App />
