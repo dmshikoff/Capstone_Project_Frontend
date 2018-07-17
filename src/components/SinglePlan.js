@@ -33,7 +33,7 @@ class SinglePlan extends Component {
         Saturday: [{ id: "", recipe: "" }]
       },
       implemented: false,
-      groceryList: []
+      groceries: true
     };
   }
 
@@ -262,14 +262,20 @@ class SinglePlan extends Component {
               <Button
                 onClick={() => {
                   this.props.groceryListGenerator(this.props.authState.id, this.props.match.params.id, (hasData)=>{
-                    console.log(hasData)
                     if(hasData){
+                      this.setState({groceries: true})
                       window.open(
                       `http://localhost:3000/printableplan/${
                         this.props.match.params.id
                       }`,
                       "_blank"
                     );
+                    }
+                    else{
+                  setTimeout(() => {
+                    this.setState({groceries:true});
+                  }, 2000);
+                      this.setState({groceries:false})
                     }
                   })
                 }}
@@ -292,19 +298,21 @@ class SinglePlan extends Component {
               </Button>
             </Row>
           </Row>
-          <Row className="grocery-list-row">
+          <Row className="grocery-list-row error-display">
             <Col>
               {
-                this.props.groceryList.every(item => item.quantity < 0) ?
+                this.state.groceries ?
                 null :
                 <p>You currently possess the required amount of ingredients to implement this meal plan</p>
               }
             </Col>
-            <Col>
+            <Col className="error-display">
               <p>
-                {this.state.implemented
-                  ? "Your plan has been implemented and the ingredients have been deducted from your pantry!"
-                  : null}
+                {
+                  this.state.implemented ? 
+                <p>Your plan has been implemented and the ingredients have been deducted from your pantry!</p> : 
+                null
+                }
               </p>
             </Col>
           </Row>
