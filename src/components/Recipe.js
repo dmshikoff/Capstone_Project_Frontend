@@ -27,6 +27,7 @@ class Recipe extends Component {
   };
 
   render() {
+    console.log(this.props.ingredientsByRecipe)
     return (
       <div>
         <Navbar />

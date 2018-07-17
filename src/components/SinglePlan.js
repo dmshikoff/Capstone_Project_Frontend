@@ -32,7 +32,8 @@ class SinglePlan extends Component {
         Friday: [{ id: "", recipe: "" }],
         Saturday: [{ id: "", recipe: "" }]
       },
-      implemented: false
+      implemented: false,
+      groceryList: []
     };
   }
 
@@ -89,14 +90,14 @@ class SinglePlan extends Component {
                   Sunday
                 </Row>
                 <Row>
-                  {this.props.plannedRecipesByDay.map(ele => {
+                  {this.props.plannedRecipesByDay.map((ele, id) => {
                     let result;
                     if (ele.day === "Sunday") {
                       result = (
                         <p
                           data-plan-id={ele.plan_id}
                           data-recipe-id={ele.recipe_id}
-                          key={ele.recipe_id}
+                          key={ele.plan_id + '-' + id}
                           className="center-align"
                           onClick={event => {
                             this.props.history.push(
@@ -117,14 +118,14 @@ class SinglePlan extends Component {
                   Monday
                 </Row>
                 <Row>
-                  {this.props.plannedRecipesByDay.map(ele => {
+                  {this.props.plannedRecipesByDay.map((ele, id) => {
                     let result;
                     if (ele.day === "Monday") {
                       result = (
                         <p
                           data-plan-id={ele.plan_id}
                           data-recipe-id={ele.recipe_id}
-                          key={ele.recipe_id}
+                          key={ele.plan_id + '-' + id}
                           className="center-align"
                         >
                           {ele.name}
@@ -140,14 +141,14 @@ class SinglePlan extends Component {
                   Tuesday
                 </Row>
                 <Row>
-                  {this.props.plannedRecipesByDay.map(ele => {
+                  {this.props.plannedRecipesByDay.map((ele, id) => {
                     let result;
                     if (ele.day === "Tuesday") {
                       result = (
                         <p
                           data-plan-id={ele.plan_id}
                           data-recipe-id={ele.recipe_id}
-                          key={ele.recipe_id}
+                          key={ele.plan_id + '-' + id}
                           className="center-align"
                         >
                           {ele.name}
@@ -163,14 +164,14 @@ class SinglePlan extends Component {
                   Wednesday
                 </Row>
                 <Row>
-                  {this.props.plannedRecipesByDay.map(ele => {
+                  {this.props.plannedRecipesByDay.map((ele, id) => {
                     let result;
                     if (ele.day === "Wednesday") {
                       result = (
                         <p
                           data-plan-id={ele.plan_id}
                           data-recipe-id={ele.recipe_id}
-                          key={ele.recipe_id}
+                          key={ele.plan_id + '-' + id}
                           className="center-align"
                         >
                           {ele.name}
@@ -186,14 +187,14 @@ class SinglePlan extends Component {
                   Thursday
                 </Row>
                 <Row>
-                  {this.props.plannedRecipesByDay.map(ele => {
+                  {this.props.plannedRecipesByDay.map((ele, id) => {
                     let result;
                     if (ele.day === "Thursday") {
                       result = (
                         <p
                           data-plan-id={ele.plan_id}
                           data-recipe-id={ele.recipe_id}
-                          key={ele.recipe_id}
+                          key={ele.plan_id + '-' + id}
                           className="center-align"
                         >
                           {ele.name}
@@ -209,14 +210,14 @@ class SinglePlan extends Component {
                   Friday
                 </Row>
                 <Row>
-                  {this.props.plannedRecipesByDay.map(ele => {
+                  {this.props.plannedRecipesByDay.map((ele, id) => {
                     let result;
                     if (ele.day === "Friday") {
                       result = (
                         <p
                           data-plan-id={ele.plan_id}
                           data-recipe-id={ele.recipe_id}
-                          key={ele.recipe_id}
+                          key={ele.plan_id + '-' + id}
                           className="center-align"
                         >
                           {ele.name}
@@ -232,14 +233,14 @@ class SinglePlan extends Component {
                   Saturday
                 </Row>
                 <Row>
-                  {this.props.plannedRecipesByDay.map(ele => {
+                  {this.props.plannedRecipesByDay.map((ele, id) => {
                     let result;
                     if (ele.day === "Saturday") {
                       result = (
                         <p
                           data-plan-id={ele.plan_id}
                           data-recipe-id={ele.recipe_id}
-                          key={ele.recipe_id}
+                          key={ele.plan_id + '-' + id}
                           className="center-align"
                           onClick={event => {
                             this.props.history.push(
@@ -258,11 +259,18 @@ class SinglePlan extends Component {
             </Row>
             <Row className="save-plan-button">
               <Button
-                onClick={event => {
-                  this.props.groceryListGenerator(
-                    this.props.authState.id,
-                    this.props.match.params.id
-                  );
+                onClick={() => {
+                  this.props.groceryListGenerator(this.props.authState.id, this.props.match.params.id, (hasData)=>{
+                    console.log(hasData)
+                    if(hasData){
+                      window.open(
+                      `http://localhost:3000/printableplan/${
+                        this.props.match.params.id
+                      }`,
+                      "_blank"
+                    );
+                    }
+                  })
                 }}
               >
                 Generate Grocery List
@@ -285,8 +293,14 @@ class SinglePlan extends Component {
           </Row>
           <Row className="grocery-list-row">
             <Col>
-              <ul>
-                {this.props.groceryList.map(ele => {
+              {
+                this.props.groceryList.every(item => item.quantity < 0) ?
+                null :
+                <p>You currently possess the required amount of ingredients to implement this meal plan</p>
+              }
+
+
+                {/* {this.props.groceryList.map(ele => {
                   let result;
                   if (ele.quantity < 0) {
                     window.open(
@@ -300,8 +314,7 @@ class SinglePlan extends Component {
                       "You currently possess the required amount of ingredients to implement this meal plan";
                   }
                   return result;
-                })}
-              </ul>
+                })} */}
             </Col>
             <Col>
               <p>

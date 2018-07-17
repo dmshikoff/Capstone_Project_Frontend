@@ -26,6 +26,7 @@ class Ingredients extends Component {
   };
 
   render() {
+    console.log(this.props.ingredientsByUser)
     return (
       <div>
         <Navbar />
@@ -39,7 +40,7 @@ class Ingredients extends Component {
               {this.props.ingredientsByUser.map(ele => {
                 return (
                   <li className="horizontal-list-item" key={ele.name}>
-                    {ele.quantity} {ele.units}{" "}
+                    {ele.quantity} {ele.ingredients_units}{"(s)"}{" "}
                     <span className="bold-text">{ele.name}</span>
                   </li>
                 );

@@ -30,10 +30,7 @@ export const getAllIngredientsUserPosseses = userId => {
   };
 };
 
-export const createNewOwnedIngredient = (
-  user_id,
-  { name, quantity, units }
-) => {
+export const createNewOwnedIngredient = (user_id, { name, quantity, units }) => {
   return dispatch => {
     request(`/users/${user_id}/ingredients`, "post", {
       name,
@@ -125,13 +122,7 @@ export const getOneRecipe = (userId, recipeId) => {
   };
 };
 
-export const createNewRecipe = (
-  name,
-  instructions,
-  user_id,
-  ingredientsArray,
-  cb
-) => {
+export const createNewRecipe = (name, instructions, user_id, ingredientsArray, cb) => {
   return dispatch => {
     request(`/users/${user_id}/recipes`, "post", {
       name,
@@ -209,10 +200,11 @@ export const getPlannedRecipesByDay = (user_id, plan_id) => {
   };
 };
 
-export const groceryListGenerator = (user_id, plan_id) => {
+export const groceryListGenerator = (user_id, plan_id, cb) => {
   return dispatch => {
     request(`/users/${user_id}/plans/${plan_id}/groceryList`).then(
       response => {
+        if(cb) cb(response.data.data && response.data.data.length > 0)
         dispatch({
           type: GROCERY_LIST,
           payload: response.data.data
