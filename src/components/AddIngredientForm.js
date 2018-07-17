@@ -112,6 +112,13 @@ class AddIngredientForm extends Component {
               Add
             </Button>
           </form>
+          <Row className="error-display">
+            {
+              this.props.errorMessage.message ?
+              <p>Missing ingredient fields</p> :
+              null
+            }
+            </Row>
         </Row>
       </div>
     );
@@ -122,12 +129,14 @@ const mapStateToProps = ({
   createUserOwnedIngredient,
   ingredientsByUser,
   allIngredientsUsed,
-  addedIngredient
+  addedIngredient,
+  errorMessage
 }) => ({
   createUserOwnedIngredient,
   ingredientsByUser,
   allIngredientsUsed,
-  addedIngredient
+  addedIngredient,
+  errorMessage
 });
 
 const mapDispatchToProps = dispatch =>

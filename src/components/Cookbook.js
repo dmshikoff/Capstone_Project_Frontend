@@ -61,6 +61,7 @@ class Cookbook extends Component {
   };
 
   render() {
+    console.log(this.props.errorMessage)
     return (
       <div>
         <Navbar />
@@ -203,6 +204,13 @@ class Cookbook extends Component {
                 type="textarea"
                 label="Instructions"
               />
+              <Row className="error-display">
+            {
+              this.props.errorMessage ?
+              <p>{this.props.errorMessage.message}</p> :
+              null
+            }
+            </Row>
               <Row className="recipe-button-row">
                 <Button>Create Recipe</Button>
               </Row>
@@ -218,11 +226,15 @@ class Cookbook extends Component {
 const mapStateToProps = ({
   recipesByUser,
   ingredientsByUser,
-  oneRecipeByUser
+  oneRecipeByUser,
+  newRecipe,
+  errorMessage
 }) => ({
   recipesByUser,
   ingredientsByUser,
-  oneRecipeByUser
+  oneRecipeByUser,
+  newRecipe,
+  errorMessage
 });
 
 const mapDispatchToProps = dispatch =>

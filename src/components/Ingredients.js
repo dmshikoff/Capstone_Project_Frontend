@@ -26,7 +26,6 @@ class Ingredients extends Component {
   };
 
   render() {
-    console.log(this.props.ingredientsByUser)
     return (
       <div>
         <Navbar />

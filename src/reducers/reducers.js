@@ -45,7 +45,7 @@ const oneRecipeByUser = (state = [], action) => {
   }
 };
 
-const createNewRecipe = (state = [], action) => {
+const newRecipe = (state = [], action) => {
   switch (action.type) {
     case CREATE_NEW_RECIPE:
       return action.payload;
@@ -165,7 +165,7 @@ const implementedPlan = (state = [], action) => {
 export default combineReducers({
   ingredientsByUser,
   recipesByUser,
-  createNewRecipe,
+  newRecipe,
   oneRecipeByUser,
   ingredientsByRecipe,
   plansByUser,

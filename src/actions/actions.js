@@ -71,6 +71,12 @@ export const addToIngredient = (user_id, ingredientInfo, cb) => {
       });
 
       if (cb) cb(dispatch);
+    })
+    .catch(err => {
+      dispatch({
+        type: ERR_MESSAGE,
+        payload: err.response.data
+      });
     });
   };
 };
@@ -136,6 +142,12 @@ export const createNewRecipe = (name, instructions, user_id, ingredientsArray, c
       });
 
       if (cb) cb(dispatch);
+    })
+    .catch(err => {
+      dispatch({
+        type: ERR_MESSAGE,
+        payload: err.response.data
+      });
     });
   };
 };
@@ -173,8 +185,13 @@ export const createNewPlan = (user_id, name, week, cb) => {
           payload: response.data.data
         });
         if (cb) cb();
-      }
-    );
+      })
+    .catch(err => {
+      dispatch({
+        type: ERR_MESSAGE,
+        payload: err.response.data
+      });
+    });
   };
 };
 

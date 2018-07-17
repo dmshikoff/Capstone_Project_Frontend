@@ -44,9 +44,9 @@ const Dashboard = (props) => {
             <h5 className="bold-text">My Pantry</h5>
             <div className="divider" />
             <ul className="pantry-list">
-                <li className="list-item">Manage your digital pantry</li>
-                <li className="list-item">View a list of all your ingredients</li>
-                <li className="list-item">Add ingredients to your digital pantry</li>
+                <li className="list-item">Manage my digital pantry</li>
+                <li className="list-item">View a list of all my ingredients</li>
+                <li className="list-item">Add ingredients to my digital pantry</li>
             </ul>
           </Col>
           <Col s={4} className="recipe-col recipe-col-dashboard center-align"
@@ -60,8 +60,8 @@ const Dashboard = (props) => {
             <h5 className="bold-text">My Cookbook</h5>
             <div className="divider" />
             <ul className="recipe-list">
-                <li className="list-item">Manage your cookbook</li>
-                <li className="list-item">Add new recipes to your cookbook</li>
+                <li className="list-item">Manage my cookbook</li>
+                <li className="list-item">Add new recipes to my cookbook</li>
                 <li className="list-item">Edit or remove existing recipes</li>
             </ul>
           </Col>
@@ -82,7 +82,7 @@ const Dashboard = (props) => {
             <ul className="plan-list">
                 <li className="list-item">Create and save new meal plans</li>
                 <li className="list-item">Select which meal plans to follow each week</li>
-                <li className="list-item">Download digital shopping list for all your missing ingredients</li>
+                <li className="list-item">Download digital shopping list for all my missing ingredients</li>
             </ul>
           </Col>
         </Row>

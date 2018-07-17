@@ -110,7 +110,7 @@ class RemoveIngredientForm extends Component {
               Remove
             </Button>
           </form>
-          <Row>
+          <Row className="error-display">
           {
             this.props.errorMessage ? <p>{this.props.errorMessage.message}</p> : null
           }

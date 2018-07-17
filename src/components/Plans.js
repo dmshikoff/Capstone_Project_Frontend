@@ -155,7 +155,6 @@ class Plans extends Component {
                             }
                           }}
                           onAutocomplete={recipeName => {
-                            console.log("name", recipeName);
                             const recipe = this.props.recipesByUser.find(
                               ele => ele.name === recipeName
                             );
@@ -202,7 +201,6 @@ class Plans extends Component {
                             }
                           }}
                           onAutocomplete={recipeName => {
-                            console.log("name", recipeName);
                             const recipe = this.props.recipesByUser.find(
                               ele => ele.name === recipeName
                             );
@@ -248,7 +246,6 @@ class Plans extends Component {
                             }
                           }}
                           onAutocomplete={recipeName => {
-                            console.log("name", recipeName);
                             const recipe = this.props.recipesByUser.find(
                               ele => ele.name === recipeName
                             );
@@ -294,7 +291,6 @@ class Plans extends Component {
                             }
                           }}
                           onAutocomplete={recipeName => {
-                            console.log("name", recipeName);
                             const recipe = this.props.recipesByUser.find(
                               ele => ele.name === recipeName
                             );
@@ -344,7 +340,6 @@ class Plans extends Component {
                             }
                           }}
                           onAutocomplete={recipeName => {
-                            console.log("name", recipeName);
                             const recipe = this.props.recipesByUser.find(
                               ele => ele.name === recipeName
                             );
@@ -394,7 +389,6 @@ class Plans extends Component {
                             }
                           }}
                           onAutocomplete={recipeName => {
-                            console.log("name", recipeName);
                             const recipe = this.props.recipesByUser.find(
                               ele => ele.name === recipeName
                             );
@@ -440,7 +434,6 @@ class Plans extends Component {
                             }
                           }}
                           onAutocomplete={recipeName => {
-                            console.log("name", recipeName);
                             const recipe = this.props.recipesByUser.find(
                               ele => ele.name === recipeName
                             );
@@ -468,6 +461,13 @@ class Plans extends Component {
               <Row className="save-plan-button">
                 <Button>Save Meal Plan</Button>
               </Row>
+              <Row className="error-display">
+            {
+              this.props.errorMessage.message ?
+              <p>Plan must have a name and at least one recipe</p> :
+              null
+            }
+            </Row>
             </form>
           </Row>
         </Row>
@@ -477,10 +477,11 @@ class Plans extends Component {
   }
 }
 
-const mapStateToProps = ({ plansByUser, recipesByUser, newPlan }) => ({
+const mapStateToProps = ({ plansByUser, recipesByUser, newPlan, errorMessage }) => ({
   plansByUser,
   recipesByUser,
-  newPlan
+  newPlan,
+  errorMessage
 });
 
 const mapDispatchToProps = dispatch =>
