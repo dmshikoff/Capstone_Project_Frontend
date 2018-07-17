@@ -47,6 +47,12 @@ class RemoveIngredientForm extends Component {
                     )
                   )
               );
+              this.setState({
+                id: "",
+                name: "",
+                quantity: "",
+                unit: ""
+              });
             }}
           >
             <Input
@@ -66,7 +72,7 @@ class RemoveIngredientForm extends Component {
                 }
               }}
             >
-              <option value=''>-- Select a Thing--</option>
+              <option value="" />
               {this.props.ingredientsByUser.map(ele => {
                 return (
                   <option key={ele.id} value={ele.name}>
@@ -111,9 +117,9 @@ class RemoveIngredientForm extends Component {
             </Button>
           </form>
           <Row className="error-display">
-          {
-            this.props.errorMessage ? <p>{this.props.errorMessage.message}</p> : null
-          }
+            {this.props.errorMessage ? (
+              <p>{this.props.errorMessage.message}</p>
+            ) : null}
           </Row>
         </Row>
       </div>

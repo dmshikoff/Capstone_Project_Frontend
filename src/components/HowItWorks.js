@@ -8,7 +8,6 @@ import { withAuthentication } from "../helpers";
 import { withRouter } from "react-router-dom"
 
 const HowItWorks = (props) => {
-  console.log(props)
   return (
     <div className="how-it-works-div">
       <Row>

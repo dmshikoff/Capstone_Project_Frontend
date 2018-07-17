@@ -1,5 +1,4 @@
 .banner {
-    display: flex;
     height: 80vh;
     background-image: url('../images/dish-egg-food.jpg');
     background-repeat: no-repeat;
@@ -12,7 +11,7 @@
 }
 
 .banner-text {
-    margin-top: 75px;
+    padding-top: 75px;
 }
 
 .row {
