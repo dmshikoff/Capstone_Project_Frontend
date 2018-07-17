@@ -265,7 +265,7 @@ class SinglePlan extends Component {
                     if(hasData){
                       this.setState({groceries: true})
                       window.open(
-                      `${process.env.REACT_APP_FRONTEND}/printableplan/${this.props.match.params.id}`,
+                      `/printableplan/${this.props.match.params.id}`,
                       "_blank"
                     );
                     }
