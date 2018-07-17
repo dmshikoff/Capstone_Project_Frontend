@@ -1,4 +1,3 @@
-import axios from "axios";
 import { request } from "../helpers/";
 export const ERR_MESSAGE = "ERR_MESSAGE";
 export const GET_INGREDIENTS_BY_USER = "GET_INGREDIENTS_BY_USER";

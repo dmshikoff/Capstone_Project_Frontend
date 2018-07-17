@@ -75,6 +75,7 @@ class SinglePlan extends Component {
   };
 
   render() {
+    console.log(this.props.groceryList)
     return (
       <div>
         <Navbar />
