@@ -19,8 +19,7 @@ export const GROCERY_LIST = "GROCERY_LIST";
 
 export const getAllIngredientsUserPosseses = userId => {
   return dispatch => {
-    axios
-      .get(`http://localhost:5000/users/${userId}/ingredients`)
+    request(`/users/${userId}/ingredients`)
       .then(response => {
         dispatch({
           type: GET_INGREDIENTS_BY_USER,
