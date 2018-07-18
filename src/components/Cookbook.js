@@ -127,6 +127,7 @@ class Cookbook extends Component {
                 }}
                 type="text"
                 label="Recipe Name"
+                required
               />
               {this.state.ingredients.map((ele, index) => {
                 return (
@@ -138,6 +139,7 @@ class Cookbook extends Component {
                         this.handleNameChange(index, "qty", event.target.value)
                       }
                       label="Qty"
+                      required
                     />
                     <Input
                       type="select"
@@ -147,6 +149,7 @@ class Cookbook extends Component {
                       onChange={event =>
                         this.handleNameChange(index, "unit", event.target.value)
                       }
+                      required
                     >
                       <option value="empty" />
                       <option value="ml">milliliter(s)/ml</option>
@@ -187,6 +190,7 @@ class Cookbook extends Component {
                         );
                         this.handleNameAutoComplete(index, ingredient);
                       }}
+                      required
                     />
                   </Row>
                 );
@@ -203,6 +207,7 @@ class Cookbook extends Component {
                 }}
                 type="textarea"
                 label="Instructions"
+                required
               />
               <Row className="error-display">
             {
