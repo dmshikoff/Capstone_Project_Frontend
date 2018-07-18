@@ -20,6 +20,8 @@
 }
 
 .plan-schedule-row {
+    max-width: 1390px;
+    margin: auto;
     flex-wrap: wrap;
 }
 
@@ -53,10 +55,6 @@
 
 .plan-recipe-input {
     max-width:  170px;
-}
-
-.plan-schedule-row {
-    margin: 0px 25px;
 }
 
 .fa-plus-circle {
