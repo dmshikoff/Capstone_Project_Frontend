@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Row, Input, Col, Autocomplete, Button, Modal } from "react-materialize";
+import {
+  Row,
+  Input,
+  Col,
+  Autocomplete,
+  Button,
+  Modal
+} from "react-materialize";
 import {
   getAllPlansByUser,
   getAllRecipes,
@@ -69,18 +76,35 @@ class Plans extends Component {
         <Navbar />
         <Row className="plans-row">
           <Row className="center-align">
-            <h2 className="my-plans-title-row">My Plans <Modal
-              header="Meal Plan Help"
-              trigger={<img className="plan-info-img" src={info} alt="info" />}
-            >
-              <ul>
-                <li>• To add a plan, complete the form at the bottom of the page</li>
-                <li>• You may add as many recipes as you plan to cook for each day</li>
-                <li>• To add an another recipe, simply click the plus sign</li>
-                <li>• Don't forget to add a Plan Name ad the top of the form</li>
-                <li>• Any plans that you have saved before will appear at the top of the page</li>
-              </ul>
-            </Modal></h2>
+            <h2 className="my-plans-title-row">
+              My Plans{" "}
+              <Modal
+                header="Meal Plan Help"
+                trigger={
+                  <img className="plan-info-img" src={info} alt="info" />
+                }
+              >
+                <ul>
+                  <li>
+                    • To add a plan, complete the form at the bottom of the page
+                  </li>
+                  <li>
+                    • You may add as many recipes as you plan to cook for each
+                    day
+                  </li>
+                  <li>
+                    • To add an another recipe, simply click the plus sign
+                  </li>
+                  <li>
+                    • Don't forget to add a Plan Name ad the top of the form
+                  </li>
+                  <li>
+                    • Any plans that you have saved before will appear at the
+                    top of the page
+                  </li>
+                </ul>
+              </Modal>
+            </h2>
           </Row>
           <div className="divider" />
           <Row className="recipe-row">
@@ -117,6 +141,18 @@ class Plans extends Component {
                     this.props.getAllPlansByUser(this.props.authState.id);
                   }
                 );
+                this.setState({
+                  planName: "",
+                  week: {
+                    Sunday: [{ id: "", recipe: "" }],
+                    Monday: [{ id: "", recipe: "" }],
+                    Tuesday: [{ id: "", recipe: "" }],
+                    Wednesday: [{ id: "", recipe: "" }],
+                    Thursday: [{ id: "", recipe: "" }],
+                    Friday: [{ id: "", recipe: "" }],
+                    Saturday: [{ id: "", recipe: "" }]
+                  }
+                });
               }}
             >
               <Row className="new-plan-row">
@@ -462,12 +498,10 @@ class Plans extends Component {
                 <Button>Save Meal Plan</Button>
               </Row>
               <Row className="error-display">
-            {
-              this.props.errorMessage.message ?
-              <p>Plan must have a name and at least one recipe</p> :
-              null
-            }
-            </Row>
+                {this.props.errorMessage.message ? (
+                  <p>Plan must have a name and at least one recipe</p>
+                ) : null}
+              </Row>
             </form>
           </Row>
         </Row>
@@ -477,7 +511,12 @@ class Plans extends Component {
   }
 }
 
-const mapStateToProps = ({ plansByUser, recipesByUser, newPlan, errorMessage }) => ({
+const mapStateToProps = ({
+  plansByUser,
+  recipesByUser,
+  newPlan,
+  errorMessage
+}) => ({
   plansByUser,
   recipesByUser,
   newPlan,
