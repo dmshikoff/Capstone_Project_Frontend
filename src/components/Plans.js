@@ -218,7 +218,6 @@ class Plans extends Component {
                         <Autocomplete
                           title="Recipe"
                           key={index}
-                          value={this.state.week.Monday[0].recipe}
                           className="plan-recipe-input"
                           data={this.props.recipesByUser.reduce((acc, ele) => {
                             acc[ele.name] = null;
