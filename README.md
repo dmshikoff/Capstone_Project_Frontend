@@ -33,6 +33,8 @@ Updates will come with Alexa Functionality and will be posted in this ReadMe
 
 ## Author
 
-Daniel M Shikoff /n
+Daniel M Shikoff
 dmshikoff@gmail.com
+www.linkedin.com/in/dshikoff
+www.daniel-shikoff.surge.sh
 
