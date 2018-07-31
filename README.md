@@ -16,3 +16,4 @@ This project requires Node.js to work and also utilizes React.js framework. Foll
 8. If done correctly you should see a response with origin and the url to your forked repo.
 9. Now type the command ```git pull origin master``` this will pull the whole repo to your local machine.
 10. Once on your local machine, you will need to install all of the node packages and dependencies, type the command ```npm install```
+
