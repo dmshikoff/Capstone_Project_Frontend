@@ -20,4 +20,19 @@ This project requires Node.js to work and also utilizes React.js framework. Foll
 ## What Did I Use
 
 * JavaScript
+* HTML/CSS
+* React/Redux/React Router
+* Matrerialize
+* Axios
+* Convert-Units NPM package
+* Scroll-To-Element NPM package
+
+## Updates
+
+Updates will come with Alexa Functionality and will be posted in this ReadMe
+
+## Author
+
+Daniel M Shikoff /n
+dmshikoff@gmail.com
 
