@@ -31,6 +31,10 @@ This project requires Node.js to work and also utilizes React.js framework. Foll
 
 Updates will come with Alexa Functionality and will be posted in this ReadMe
 
+## To Contribute
+
+please email directly if you have any desire to contribute to the project before making a pull request. Any unsolicited pull requests will be declined.
+
 ## Author
 
 Daniel M Shikoff
